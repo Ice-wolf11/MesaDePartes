@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Estado extends Model
 {
     use HasFactory;
-}
+
+    //relacion uno a muchos con tramites
+    public function tramites(){
+        return $this->hasMany(Tramite::class);
+    }
+
+    

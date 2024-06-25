@@ -45,4 +45,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    //relacion de muchos a muchos con tramites
+    public function tramites(){
+        return $this->belongsToMany(Tramite::class)->withTimestamps()->withPivot('fecha');//nota=> acuerdate de agregar el campo fecha en la tabla revisiones
+    }
+    /*
+    //metodo de relacion principal uno a muchos con revisiones
+    public function revisiones(){
+        return $this->hasMany(Revisione::class);
+    }*/
 }
