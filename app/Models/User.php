@@ -48,7 +48,7 @@ class User extends Authenticatable
 
     //relacion de muchos a muchos con tramites
     public function tramites(){
-        return $this->belongsToMany(Tramite::class)->withTimestamps()->withPivot('fecha');//nota=> acuerdate de agregar el campo fecha en la tabla revisiones
+        return $this->belongsToMany(Tramite::class)->withTimestamps()->withPivot('fecha_hora');//nota=> acuerdate de agregar el campo fecha en la tabla revisiones
     }
     /*
     //metodo de relacion principal uno a muchos con revisiones

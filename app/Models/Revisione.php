@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Revisione extends Model
 {
     use HasFactory;
-
+/*
     //relacion inversa uno a muchos con tramite
     public function tramite(){
         return $this->belongsTo(Tramite::class);
     }
-
+*/
     
 }
