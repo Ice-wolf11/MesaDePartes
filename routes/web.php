@@ -6,6 +6,11 @@ Route::get('/', function () {
     return view('template');
 });
 
+//ruta panel-index
+
+Route::view('/panel', 'panel.index')->name('panel');
+
+
 //login
 Route::get('/login', function () {
     return view('auth.login');
