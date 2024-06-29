@@ -1,0 +1,132 @@
+.columnas {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 0 10rem 10rem 10rem;
+}
+
+.logo {
+    margin-left: 1em;
+    width: 50px;
+}
+
+.contenedor {
+    margin-top: 5rem;
+}
+
+.containerForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start; /* Alineación al inicio para evitar espacios innecesarios */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Sección del formulario */
+.form-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin: 10px; /* Espacio entre las secciones */
+}
+
+.form-section h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Igualamos la altura de los inputs y textarea */
+.form-group input,
+.form-group select,
+.form-group textarea {
+    height: 38px; /* Ajusta esta altura según tus necesidades */
+}
+
+
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #66afe9;
+    outline: none;
+    box-shadow: 0 0 5px rgba(102, 175, 233, 0.6);
+}
+
+/* Especificamos el estilo original para input[type="file"] */
+.form-group input[type="file"] {
+    height: auto;
+    padding: initial;
+}
+
+.optional {
+    font-size: 0.9em;
+    color: #777;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+/* Sección del botón de envío */
+.submit-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.submit-section button {
+    width: auto;
+    padding: 10px 20px;
+}
+
+/*buscar documento*/
+
+
+/* Footer */
+
+footer {
+    padding: 2em 0;
+    color: aliceblue;
+    background-color: black;
+    text-align: center;
+}
