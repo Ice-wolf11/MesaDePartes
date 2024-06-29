@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('revisiones', function (Blueprint $table) {
             $table->id();
             $table->datetime('fecha_hora');
+            $table->string('descripcion',255);
+            $table->string('ruta_archivo',255);
             $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
             $table->foreignId('tramite_id')->constrained('tramites')->onDelete('cascade');
             $table->timestamps();
