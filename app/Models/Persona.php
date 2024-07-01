@@ -12,4 +12,6 @@ class Persona extends Model
     public function tramites(){
         return $this->hasMany(Tramite::class);
     }
+
+    protected $fillable = ['nombre','tipo_persona','numero_documento','email','telefono'];
 }

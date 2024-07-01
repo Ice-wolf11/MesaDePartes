@@ -14,4 +14,4 @@ class Estado extends Model
         return $this->hasMany(Tramite::class);
     }
 
-    
+}

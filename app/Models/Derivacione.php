@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Revisione extends Model
+class Derivacione extends Model
 {
     use HasFactory;
 
@@ -17,5 +17,4 @@ class Revisione extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
-    
 }

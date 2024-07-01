@@ -20,15 +20,21 @@ class Tramite extends Model
     }
 
     //relacion muchos a muchos con usuario
-    public function users(){
-        return $this->belongsToMany(User::class)->withTimestamps()->withPivot('fecha_hora'); //nota=> acuerdate de agregar este campo en la tabla revisiones
-    }
+    /*public function users(){
+        return $this->belongsToMany(User::class)->withTimestamps()->withPivot('fecha_hora','descripcion','ruta_archivo'); //nota=> acuerdate de agregar este campo en la tabla revisiones
+    }*/
+    
+    protected $fillable = ['tipo_tramite','folios','asunto','ruta_archivo','cod_seguridad','estado_id','persona_id'];
 
-
-    /*
+    
     //relacion de uno a muchos con revisiones
     public function revisiones(){
         return $this->hasMany(Revisione::class);
-    }*/
+    }
+
+    //relacion de uno a muchos con derivaciones
+    public function derivaciones(){
+        return $this->hasMany(Derivacione::class);
+    }
 }
 

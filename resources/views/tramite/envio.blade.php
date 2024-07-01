@@ -1,15 +1,19 @@
 @extends('tramite.partials.principal')
-
+@push('css')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@endpush
 @section('content')
-    <form action="">
+@include('layouts.partials.alert')
+    <form action="{{route('tramites.store')}}" method="POST">
+        @csrf
         <div class="containerForm">
-            <div class="form-section">
-                <h2>Documento</h2>
-                @component('tramite.components.documento')@endcomponent
-            </div>
             <div class="form-section">
                 <h2>Remitente</h2>
                 @component('tramite.components.persona')@endcomponent
+            </div>
+            <div class="form-section">
+                <h2>Documento</h2>
+                @component('tramite.components.documento')@endcomponent
             </div>
         </div>
         <div class="submit-section">
@@ -17,5 +21,8 @@
         </div>
     </form>
 @endsection
+@push('js')
+    
+@endpush
 
 

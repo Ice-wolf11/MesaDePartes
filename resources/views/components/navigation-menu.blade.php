@@ -9,7 +9,7 @@
                 </a>
                 <div class="sb-sidenav-menu-heading">Panel de trabajador</div>
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                     Revisión
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
@@ -17,13 +17,13 @@
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="layout-static.html">Mis Tramites Pendientes</a>
                         <a class="nav-link" href="layout-sidenav-light.html">Tramites Revisados</a>
-                        <a class="nav-link" href="layout-sidenav-light.html">Ver Todos los Tramites</a>
+                        <a class="nav-link" href="{{route('tramites.index')}}">Ver Todos los Tramites</a>
                         <a class="nav-link" href="layout-sidenav-light.html">Tramites Asignados</a>
                     </nav>
                 </div>
                 <div class="sb-sidenav-menu-heading">Panel de Administrador</div>
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-screwdriver-wrench"></i></i></div>
                     Administración
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>

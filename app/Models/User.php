@@ -50,9 +50,14 @@ class User extends Authenticatable
     public function tramites(){
         return $this->belongsToMany(Tramite::class)->withTimestamps()->withPivot('fecha_hora');//nota=> acuerdate de agregar el campo fecha en la tabla revisiones
     }
-    /*
+    
     //metodo de relacion principal uno a muchos con revisiones
     public function revisiones(){
         return $this->hasMany(Revisione::class);
-    }*/
+    }
+
+    //metodo de relacion principal uno a muchos con derivaciones
+    public function derivaciones(){
+        return $this->hasMany(Derivacione::class);
+    }
 }

@@ -302,7 +302,10 @@ kbd kbd {
 figure {
   margin: 0 0 1rem;
 }
-
+.logo {
+  margin-left: 1em;
+  width: 50px;
+}
 img,
 svg {
   vertical-align: middle;

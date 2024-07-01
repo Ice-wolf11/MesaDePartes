@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\tramiteController;
+use App\Http\Controllers\personaController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('index');
 
 //ruta panel-index
 
@@ -19,7 +21,12 @@ Route::view('/login', 'auth.login')->name('login');
     return view('auth.login');
 });*/
 
+//controladores
+Route::resource('tramites', tramiteController::class);
+Route::resource('personas', personaController::class);
+
 //tramites
+
 Route::view('/envio', 'tramite.envio')->name('envio');
 Route::view('/seguimiento','tramite.seguimiento')->name('seguimiento');
 
