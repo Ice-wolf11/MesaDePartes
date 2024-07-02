@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreDerivacioneRequest extends FormRequest
+class StoreAreaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class StoreDerivacioneRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nombre' => 'required|max:50|unique:areas,nombre',
         ];
     }
 }

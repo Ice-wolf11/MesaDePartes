@@ -5,12 +5,10 @@
 @endpush
 @section('content')
     <div class="container-fluid px-4"> 
-        <h1 class="mt-4 text-center">Derivar Tramites</h1>
+        <h1 class="mt-4 text-center">Derivar Documento</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="{{route('panel')}}">Inicio</a></li>
-            <li class="breadcrumb-item"><a href="{{route('tramite.index')}}">Inicio</a></li>
-            <li class="breadcrumb-item" active>DerivarTramite</li>
+            <li class="breadcrumb-item" active>Derivar</li>
         </ol>
     </div>
-    
 @endsection

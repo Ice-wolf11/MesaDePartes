@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreDerivacioneRequest;
 use App\Models\Estado;
 use App\Models\Tramite;
+use App\Models\Derivacione;
+
+
 class derivacioneController extends Controller
 {
     /**
@@ -12,7 +16,7 @@ class derivacioneController extends Controller
      */
     public function index()
     {
-        //
+        return view('derivacione.index');
     }
 
     /**
@@ -20,7 +24,7 @@ class derivacioneController extends Controller
      */
     public function create()
     {
-        //
+        return view('derivacione.create');
     }
 
     /**

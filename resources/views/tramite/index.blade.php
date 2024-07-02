@@ -23,7 +23,7 @@
                             <th>id</th>
                             <th>Nombre Remitente</th>
                             <th>Tipo</th>
-                            <th>Folios</th>
+                            <th>Estado</th>
                             <th>Fecha</th>
                             <th>Documento</th>
                             <th>Acciones</th>
@@ -36,12 +36,12 @@
                             <td>{{$tramite->id}}</td>
                             <td>{{$tramite->persona->nombre}}</td>
                             <td>{{$tramite->tipo_tramite}}</td>
-                            <td>{{$tramite->folios}}</td>
+                            <td><p  class="badge text-bg-primary">{{$tramite->estado->descripcion}}</p></td>
                             <td>{{$tramite->created_at}}</td>
                             <td><a href="{{$tramite->ruta_archivo}}">Abrir</a></td>
                             <td><div class="d-grid gap-2 d-md-block">
-                                <form action="{{route('tramite.derivar')}}"><button class="btn btn-success" type="button">Derivar</button></form>
-                                <form action=""><button class="btn btn-danger" type="button">Eliminar</button></form>   
+                                <form action="{{route('derivaciones.create')}}" class="d-inline">@csrf<button class="btn btn-success" type="submit">Derivar</button></form>
+                                <form action="" class="d-inline"><button class="btn btn-danger" type="button">Eliminar</button></form>   
                                     
                                 </div>
                             </td>

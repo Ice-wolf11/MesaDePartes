@@ -46,6 +46,11 @@ class User extends Authenticatable
         ];
     }
 
+    //relacion inversa de uno a muchos con area
+    public function area(){
+        return $this->belongsTo(Area::class);
+    }
+
     //relacion de muchos a muchos con tramites
     public function tramites(){
         return $this->belongsToMany(Tramite::class)->withTimestamps()->withPivot('fecha_hora');//nota=> acuerdate de agregar el campo fecha en la tabla revisiones

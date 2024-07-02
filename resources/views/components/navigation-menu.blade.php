@@ -51,6 +51,17 @@
                                 
                             </nav>
                         </div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseArea" aria-expanded="false" aria-controls="pagesCollapseArea">
+                            Areas Academicas
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="pagesCollapseArea" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{{route('areas.index')}}">Ver Areas</a>
+                                
+                                
+                            </nav>
+                        </div>
                     </nav>
                 </div>
                 <!--<div class="sb-sidenav-menu-heading">Addons</div>

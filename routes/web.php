@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\tramiteController;
 use App\Http\Controllers\personaController;
-
+use App\Http\Controllers\derivacioneController;
+use App\Http\Controllers\areaController;
 Route::get('/', function () {
     return view('welcome');
 })->name('index');
@@ -24,7 +25,8 @@ Route::view('/login', 'auth.login')->name('login');
 //controladores
 Route::resource('tramites', tramiteController::class);
 Route::resource('personas', personaController::class);
-
+Route::resource('derivaciones', derivacioneController::class);
+Route::resource('areas', areaController::class);
 //tramites
 
 Route::view('/envio', 'tramite.envio')->name('envio');

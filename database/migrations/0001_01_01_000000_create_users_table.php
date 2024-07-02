@@ -16,8 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('apellidos');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('email_verified_at');
             $table->string('password');
+            $table->string('cargo');
+            $table->foreignId('area_id')->nullable()->constrained('areas')->onDelete('set null');
             $table->rememberToken();
             $table->timestamps();
         });

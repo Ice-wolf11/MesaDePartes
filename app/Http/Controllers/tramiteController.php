@@ -9,6 +9,7 @@ use App\Models\Persona;
 use App\Models\Estado;
 use App\Models\Tramite;
 
+
 class tramiteController extends Controller
 {
     /**
@@ -16,7 +17,8 @@ class tramiteController extends Controller
      */
     public function index()
     {
-        $tramite = Tramite::with('persona')->get();
+        $tramite = Tramite::with('persona', 'estado')->get();
+
         //dd($tramite);
         return view('tramite.index',['tramites' => $tramite]);
     }
