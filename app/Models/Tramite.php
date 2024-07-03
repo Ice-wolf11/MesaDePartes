@@ -47,6 +47,15 @@ class Tramite extends Model
         return $name;
     }
 
+    /*public static function deletePDF($pdf)
+    {
+        $file = $pdf;
+        $name = time() . $file->getClientOriginalName();
+        //$pdf->move(public_path('/archivos/pdfTramite/'), $name);
+        Storage::delete('public/tramites',$file,$name,'public');
+        return $name;
+    }*/
+
     /*public function verPdf($id)
     {
         $tramite = Tramite::findOrFail($id);

@@ -41,11 +41,34 @@
                             <td><a href="{{ route('tramites.ver-pdf', $tramite->id) }}">Abrir</a></td>
                             <td><div class="d-grid gap-2 d-md-block">
                                 <form action="{{route('derivaciones.create')}}" class="d-inline">@csrf<button class="btn btn-success" type="submit">Derivar</button></form>
-                                <form action="" class="d-inline"><button class="btn btn-danger" type="button">Eliminar</button></form>   
+                                <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal-{{$tramite->id}}">Eliminar</button>   
                                     
                                 </div>
                             </td>
                            </tr>
+                            <!-- Modal -->
+                            <div class="modal fade" id="confirmModal-{{$tramite->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Mensaje de confirmación</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                    ¿Esta seguro de esta acción?
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <form action="{{route('tramites.destroy',['tramite'=>$tramite->id])}}" method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger">Confirmar</button>
+                                    </form>
+                                    
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
                        @endforeach
                     </tbody>
                 </table>

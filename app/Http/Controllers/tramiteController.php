@@ -30,7 +30,7 @@ class tramiteController extends Controller
      */
     public function index()
     {
-        $tramite = Tramite::with('persona', 'estado')->get();
+        $tramite = Tramite::with('persona', 'estado')->latest()->get();
 
         //dd($tramite);
         return view('tramite.index',['tramites' => $tramite]);
@@ -50,7 +50,7 @@ class tramiteController extends Controller
     public function store(StoreTramiteRequest $request)
     {
         //dd($request);
-        $estado = Estado::find(1);
+        //$estado = Estado::find(1);
         try{
             DB::beginTransaction();
             if ($request->hasFile('adjuntarArchivo')) {
@@ -72,7 +72,7 @@ class tramiteController extends Controller
                 'asunto' => $request->validated()['asunto'],
                 'ruta_archivo' =>$archivo,
                 'cod_seguridad' => '1245',
-                'estado_id' => $estado->id,
+                'estado_id' => '1',
                 'persona_id' => $persona->id
                 
             ]);
@@ -115,6 +115,30 @@ class tramiteController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $tramite = Tramite::findOrFail($id); // Utiliza findOrFail para manejar el caso en que no se encuentre el trámite
+
+        $filePath = 'public/tramites/' . $tramite->ruta_archivo;
+
+        try {
+            // Comienza una transacción para asegurarte de que ambas operaciones (eliminación del archivo y del registro) se completen
+            DB::beginTransaction();
+
+            // Elimina el archivo PDF si existe
+            if (Storage::exists($filePath)) {
+                Storage::delete($filePath);
+            }
+
+            // Elimina el registro del trámite
+            $tramite->delete();
+
+            DB::commit();
+
+            return redirect()->route('tramites.index')->with('success', 'Trámite eliminado correctamente junto con su archivo PDF.');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('tramites.index')->with('error', 'Ocurrió un error al eliminar el trámite: ' . $e->getMessage());
+        }
     }
+
 }
