@@ -21,7 +21,7 @@ class Tramite extends Model
     }
 
     //relacion muchos a muchos con usuario
-    /*public function users(){
+    /*public function trabajadores(){
         return $this->belongsToMany(User::class)->withTimestamps()->withPivot('fecha_hora','descripcion','ruta_archivo'); //nota=> acuerdate de agregar este campo en la tabla revisiones
     }*/
     

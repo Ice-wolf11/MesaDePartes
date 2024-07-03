@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('derivaciones', function (Blueprint $table) {
+        Schema::create('revisiones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
-            $table->foreignId('tramite_id')->constrained('tramites');
+            $table->string('descripcion',255);
+            $table->string('ruta_archivo',255);
+            $table->foreignId('trabajadore_id')->nullable()->constrained('trabajadores')->onDelete('set null');
+            $table->foreignId('tramite_id')->constrained('tramites')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('derivaciones');
+        Schema::dropIfExists('revisiones');
     }
 };

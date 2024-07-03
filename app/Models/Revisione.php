@@ -14,8 +14,8 @@ class Revisione extends Model
         return $this->belongsTo(Tramite::class);
     }
     //relacion inversa con usuario
-    public function user(){
-        return $this->belongsTo(User::class);
+    public function trabajador(){
+        return $this->belongsTo(Trabajadore::class);
     }
     
 }

@@ -27,6 +27,7 @@ Route::resource('tramites', tramiteController::class);
 Route::resource('personas', personaController::class);
 Route::resource('derivaciones', derivacioneController::class);
 Route::resource('areas', areaController::class);
+Route::resource('users', userController::class);
 //tramites
 Route::get('tramites/{id}/ver-pdf', [tramiteController::class, 'verPdf'])->name('tramites.ver-pdf');
 
