@@ -1,11 +1,5 @@
+
 <div class="form-container">
-    <div class="form-group">
-        <label for="nombre">Nombres y Apellidos/Nombre de la Entidad</label>
-        <input type="text" id="nombre" name="nombre" value="{{ old('nombre') }}">
-        @error('nombre')
-            <small class="text-danger">{{ $message }}</small>
-        @enderror
-    </div>
     <div class="form-group">
         <label for="tipoPersona">Tipo de Persona</label>
         <select id="tipoPersona" name="tipoPersona">
@@ -14,6 +8,13 @@
             <option value="juridica">Persona Jurídica</option>
         </select>
         @error('tipoPersona')
+            <small class="text-danger">{{ $message }}</small>
+        @enderror
+    </div>
+    <div class="form-group">
+        <label for="nombre">Nombres y Apellidos/Nombre de la Entidad</label>
+        <input type="text" id="nombre" name="nombre" value="{{ old('nombre') }}">
+        @error('nombre')
             <small class="text-danger">{{ $message }}</small>
         @enderror
     </div>

@@ -38,7 +38,7 @@
                             <td>{{$tramite->tipo_tramite}}</td>
                             <td><p  class="badge text-bg-primary">{{$tramite->estado->descripcion}}</p></td>
                             <td>{{$tramite->created_at}}</td>
-                            <td><a href="{{$tramite->ruta_archivo}}">Abrir</a></td>
+                            <td><a href="{{ route('tramites.ver-pdf', $tramite->id) }}">Abrir</a></td>
                             <td><div class="d-grid gap-2 d-md-block">
                                 <form action="{{route('derivaciones.create')}}" class="d-inline">@csrf<button class="btn btn-success" type="submit">Derivar</button></form>
                                 <form action="" class="d-inline"><button class="btn btn-danger" type="button">Eliminar</button></form>   

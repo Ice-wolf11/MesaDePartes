@@ -33,7 +33,7 @@ class StoreTramiteRequest extends FormRequest
             'otroTipoDocumento' => 'nullable|max:20',
             'cantidadFolios' => 'required|max:2',
             'asunto' => 'required|max:255',
-            'adjuntarArchivo' => 'required|max:255',//recuerda cambiar esto
+            'adjuntarArchivo' => 'required|mimes:pdf|max:2048',//recuerda cambiar esto
         ];
     }
 }

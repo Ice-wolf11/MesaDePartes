@@ -4,7 +4,7 @@
 @endpush
 @section('content')
 @include('layouts.partials.alert')
-    <form action="{{route('tramites.store')}}" method="POST">
+    <form action="{{route('tramites.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="containerForm">
             <div class="form-section">

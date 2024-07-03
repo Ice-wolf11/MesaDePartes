@@ -5,13 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreTramiteRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Persona;
 use App\Models\Estado;
 use App\Models\Tramite;
 
 
+
 class tramiteController extends Controller
 {
+    public function verPdf($id)
+    {
+        $tramite = Tramite::findOrFail($id);
+        $filePath = 'tramites/' . $tramite->ruta_archivo;
+
+        if (Storage::exists($filePath)) {
+            return Storage::response($filePath);
+        } else {
+            abort(404, 'Archivo no encontrado.');
+        }
+    }
     /**
      * Display a listing of the resource.
      */
@@ -40,6 +53,12 @@ class tramiteController extends Controller
         $estado = Estado::find(1);
         try{
             DB::beginTransaction();
+            if ($request->hasFile('adjuntarArchivo')) {
+                $archivo = Tramite::hambleUploadPDF($request->file('adjuntarArchivo'));
+            } else {
+                $archivo = null;
+            }
+            //dd($request);
             $persona = Persona::create([
                 'nombre' => $request->validated()['nombre'],
                 'tipo_persona' => $request->validated()['tipoPersona'],
@@ -51,7 +70,7 @@ class tramiteController extends Controller
                 'tipo_tramite' => $request->validated()['otroTipoDocumento'] ?? $request->validated()['tipoDocumento'],
                 'folios' => $request->validated()['cantidadFolios'],
                 'asunto' => $request->validated()['asunto'],
-                'ruta_archivo' => $request->validated()['adjuntarArchivo'],
+                'ruta_archivo' =>$archivo,
                 'cod_seguridad' => '1245',
                 'estado_id' => $estado->id,
                 'persona_id' => $persona->id

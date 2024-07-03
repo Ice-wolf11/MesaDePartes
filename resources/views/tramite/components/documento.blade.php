@@ -38,7 +38,7 @@
             </div>
             <div class="form-group">
                 <label for="adjuntarArchivo">Adjuntar Archivo</label>
-                <input type="file" id="adjuntarArchivo" name="adjuntarArchivo">
+                <input type="file" id="adjuntarArchivo" name="adjuntarArchivo" ">
                 @error('adjuntarArchivo')
                     <small class="text-danger">{{$message}}</small>
                 @enderror

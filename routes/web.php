@@ -28,6 +28,8 @@ Route::resource('personas', personaController::class);
 Route::resource('derivaciones', derivacioneController::class);
 Route::resource('areas', areaController::class);
 //tramites
+Route::get('tramites/{id}/ver-pdf', [tramiteController::class, 'verPdf'])->name('tramites.ver-pdf');
+
 
 Route::view('/envio', 'tramite.envio')->name('envio');
 Route::view('/seguimiento','tramite.seguimiento')->name('seguimiento');

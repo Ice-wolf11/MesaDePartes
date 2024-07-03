@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Tramite extends Model
 {
@@ -36,5 +37,26 @@ class Tramite extends Model
     public function derivaciones(){
         return $this->hasMany(Derivacione::class);
     }
-}
 
+    public static function hambleUploadPDF($pdf)
+    {
+        $file = $pdf;
+        $name = time() . $file->getClientOriginalName();
+        //$pdf->move(public_path('/archivos/pdfTramite/'), $name);
+        Storage::putFileAs('tramites',$file,$name,'public');
+        return $name;
+    }
+
+    /*public function verPdf($id)
+    {
+        $tramite = Tramite::findOrFail($id);
+        $rutaArchivo = public_path('/archivos/pdfTramite/') . $tramite->ruta_archivo;
+
+        if (file_exists($rutaArchivo)) {
+            return response()->file($rutaArchivo);
+        } else {
+            return redirect()->back()->with('error', 'El archivo no existe.');
+        }
+    }*/
+
+}
