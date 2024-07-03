@@ -17,7 +17,7 @@ class tramiteController extends Controller
     public function verPdf($id)
     {
         $tramite = Tramite::findOrFail($id);
-        $filePath = 'tramites/' . $tramite->ruta_archivo;
+        $filePath = 'public/tramites/' . $tramite->ruta_archivo;
 
         if (Storage::exists($filePath)) {
             return Storage::response($filePath);

@@ -43,7 +43,7 @@ class Tramite extends Model
         $file = $pdf;
         $name = time() . $file->getClientOriginalName();
         //$pdf->move(public_path('/archivos/pdfTramite/'), $name);
-        Storage::putFileAs('tramites',$file,$name,'public');
+        Storage::putFileAs('public/tramites',$file,$name,'public');
         return $name;
     }
 
