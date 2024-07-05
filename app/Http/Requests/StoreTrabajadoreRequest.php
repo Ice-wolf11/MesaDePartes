@@ -22,16 +22,11 @@ class StoreTrabajadoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //trabajador
-            'nombre' =>'required' ,
-            'apellido' =>'required',
-            //user
-            'email' =>'required',
-            'password' => 'nullable|string|min:8|confirmed',
-            //area
-            'area' =>'required|exists:areas,id',
-            //rol
-            'rol' =>'required',
+            'nombre' => 'required|string|max:255',
+            'apellido' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
+            'area' => 'required|exists:areas,id',
         ];
     }
 }

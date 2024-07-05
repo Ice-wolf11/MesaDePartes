@@ -80,7 +80,7 @@
                 </div>
                 <div class="col-12 text-center">
                     <button type="submit" class="btn btn-primary mt-4">Guardar</button>
-                    <button type="submit" class="btn btn-secondary mt-4">Guardar</button>
+                    <button type="reset" class="btn btn-secondary mt-4">Reiniciar</button>
                 </div>
             </form>
         </div>

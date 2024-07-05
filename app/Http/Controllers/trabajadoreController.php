@@ -99,16 +99,18 @@ class trabajadoreController extends Controller
      */
     public function update(UpdateTrabajadoreRequest $request, Trabajadore $trabajadore)
     {
-         // Actualizar el usuario
-        $user = $trabajadore->user;
+        $firstName = explode(' ', trim($request->validated()['nombre']))[0];
+        $lastName = explode(' ', trim($request->validated()['apellido']))[0];
+        $fullName = $firstName . ' ' . $lastName;
 
+        $user = $trabajadore->user;
+        $user->name = $fullName;
         $user->email = $request->validated()['email'];
         if ($request->filled('password')) {
             $user->password = Hash::make($request->validated()['password']);
         }
         $user->save();
 
-        // Actualizar el trabajador
         $trabajadore->nombre = $request->validated()['nombre'];
         $trabajadore->apellido = $request->validated()['apellido'];
         $trabajadore->area_id = $request->validated()['area'];

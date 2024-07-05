@@ -22,15 +22,12 @@ class UpdateTrabajadoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //trabajador
-            'nombre' =>'required' ,
-            'apellido' =>'required',
-            //user
-            'email' =>'required',
-            'password' => 'nullable|string|min:8|confirmed', 
-            //area
-            'area' =>'required',
-            //rol
+            
+            'nombre' => 'required|string|max:255',
+            'apellido' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $this->route('trabajadore')->user_id,
+            'password' => 'nullable|string|min:8|confirmed',
+            'area' => 'required|exists:areas,id',
             'rol' =>'required',
         ];
     }

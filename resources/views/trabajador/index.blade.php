@@ -27,8 +27,7 @@
                     <thead>
                         <tr>
                             
-                            <th>nombre</th>
-                            <th>apellido</th>
+                            <th>nombre de usuario</th>
                             <th>area</th>
                             <th>rol</th>
                             <th>acciones</th>
@@ -39,8 +38,7 @@
                     @foreach ($trabajadores as $trabajador)
                         <tr>
                             
-                            <td>{{$trabajador->nombre}}</td>
-                            <td>{{$trabajador->apellido}}</td>
+                            <td>{{$trabajador->user->name}}</td>
                             <td>{{$trabajador->area->nombre}}</td>
                             <td></td>
                             <td><div class="d-grid gap-2 d-md-block">
