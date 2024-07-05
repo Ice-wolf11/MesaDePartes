@@ -35,8 +35,8 @@
                         </a>
                         <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="#">Ver Usuarios</a>
-                                <a class="nav-link" href="#">Agregar Usuarios</a>
+                                <a class="nav-link" href="{{route('trabajadores.index')}}">Ver Usuarios</a>
+                                
                                 
                             </nav>
                         </div>
@@ -47,7 +47,7 @@
                         <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="#">Ver Roles</a>
-                                <a class="nav-link" href="#">Agregar Roles</a>
+                                
                                 
                             </nav>
                         </div>

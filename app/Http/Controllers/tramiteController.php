@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Persona;
 use App\Models\Estado;
 use App\Models\Tramite;
-
+use App\Models\User;
 
 
 class tramiteController extends Controller

@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('trabajadores', function (Blueprint $table) {
             $table->id();
-            $table->string('nombres');
-            $table->string('apellidos');
-            $table->string('cargo');
+            $table->string('nombre');
+            $table->string('apellido');
             $table->foreignId('area_id')->nullable()->constrained('areas')->onDelete('set null');
-            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

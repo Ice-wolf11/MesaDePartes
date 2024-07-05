@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreAreaRequest;
+use App\Http\Requests\UpdateAreaRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\Area;
 
@@ -67,7 +68,7 @@ class areaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreAreaRequest $request, Area $area)
+    public function update(UpdateAreaRequest $request, Area $area)
     {
         Area::where('id',$area->id)->update($request->validated());
         return redirect()->route('areas.index')->with('success','Area Editada correctamente');

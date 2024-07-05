@@ -9,6 +9,8 @@ class Trabajadore extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['nombre','apellido','area_id','user_id'];
+
     //realcion con user uno a uno
     public function user(){
         return $this->belongsTo(User::class);

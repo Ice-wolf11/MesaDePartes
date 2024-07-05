@@ -5,6 +5,7 @@ use App\Http\Controllers\tramiteController;
 use App\Http\Controllers\personaController;
 use App\Http\Controllers\derivacioneController;
 use App\Http\Controllers\areaController;
+use App\Http\Controllers\trabajadoreController;
 Route::get('/', function () {
     return view('welcome');
 })->name('index');
@@ -28,6 +29,7 @@ Route::resource('personas', personaController::class);
 Route::resource('derivaciones', derivacioneController::class);
 Route::resource('areas', areaController::class);
 Route::resource('users', userController::class);
+Route::resource('trabajadores', trabajadoreController::class);
 //tramites
 Route::get('tramites/{id}/ver-pdf', [tramiteController::class, 'verPdf'])->name('tramites.ver-pdf');
 
