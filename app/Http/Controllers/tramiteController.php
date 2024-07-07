@@ -10,6 +10,8 @@ use App\Models\Persona;
 use App\Models\Estado;
 use App\Models\Tramite;
 use App\Models\User;
+use App\Models\Derivacione;
+use App\Models\Area;
 
 
 class tramiteController extends Controller
@@ -33,7 +35,9 @@ class tramiteController extends Controller
         $tramite = Tramite::with('persona', 'estado')->latest()->get();
 
         //dd($tramite);
-        return view('tramite.index',['tramites' => $tramite]);
+
+        $derivacione = Derivacione::all();
+        return view('tramite.index',['tramites' => $tramite,'derivacione'=>$derivacione]);
     }
 
     /**
@@ -51,6 +55,10 @@ class tramiteController extends Controller
     {
         //dd($request);
         //$estado = Estado::find(1);
+
+        //generar codigo aleatorio
+        $codigoSeguridad = str_pad(mt_rand(0, 9999), 4, '0', STR_PAD_LEFT);
+
         try{
             DB::beginTransaction();
             if ($request->hasFile('adjuntarArchivo')) {
@@ -66,12 +74,13 @@ class tramiteController extends Controller
                 'email' => $request->validated()['email'],
                 'telefono' => $request->validated()['telefono']
             ]);
+
             $persona->tramites()->create([
                 'tipo_tramite' => $request->validated()['otroTipoDocumento'] ?? $request->validated()['tipoDocumento'],
                 'folios' => $request->validated()['cantidadFolios'],
                 'asunto' => $request->validated()['asunto'],
                 'ruta_archivo' =>$archivo,
-                'cod_seguridad' => '1245',
+                'cod_seguridad' => $codigoSeguridad,
                 'estado_id' => '1',
                 'persona_id' => $persona->id
                 

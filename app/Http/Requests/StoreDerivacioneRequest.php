@@ -22,7 +22,8 @@ class StoreDerivacioneRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'trabajador' => 'required',
+            'tramite_id' => 'required',
         ];
     }
 }

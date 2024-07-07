@@ -2,8 +2,10 @@
 @section('title','tramites')
 @push('css')
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endpush
 @section('content')
+@include('layouts.partials.alert')
     <div class="container-fluid px-4"> 
         <h1 class="mt-4 text-center">Tramites</h1>
         <ol class="breadcrumb mb-4">
@@ -20,7 +22,7 @@
                 <table id="datatablesSimple" class="table table-striped">
                     <thead>
                         <tr>
-                            <th>id</th>
+                            
                             <th>Nombre Remitente</th>
                             <th>Tipo</th>
                             <th>Estado</th>
@@ -33,14 +35,29 @@
                     <tbody>
                        @foreach ($tramites as $tramite)
                            <tr>
-                            <td>{{$tramite->id}}</td>
+                            
                             <td>{{$tramite->persona->nombre}}</td>
                             <td>{{$tramite->tipo_tramite}}</td>
-                            <td><p  class="badge text-bg-primary">{{$tramite->estado->descripcion}}</p></td>
+                            @if ($tramite->estado->id == '1')
+                                <td><p  class="badge text-bg-primary">{{$tramite->estado->descripcion}}</p></td>
+                            @endif
+                            @if ($tramite->estado->id == '2')
+                                <td><p  class="badge text-bg-warning">{{$tramite->estado->descripcion}}</p></td>
+                            @endif
+                            @if ($tramite->estado->id == '3')
+                                <td><p  class="badge text-bg-success">{{$tramite->estado->descripcion}}</p></td>
+                            @endif
+                            @if ($tramite->estado->id == '4')
+                                <td><p  class="badge text-bg-danger">{{$tramite->estado->descripcion}}</p></td>
+                            @endif
                             <td>{{$tramite->created_at}}</td>
                             <td><a href="{{ route('tramites.ver-pdf', $tramite->id) }}">Abrir</a></td>
                             <td><div class="d-grid gap-2 d-md-block">
-                                <form action="{{route('derivaciones.create')}}" class="d-inline">@csrf<button class="btn btn-success" type="submit">Derivar</button></form>
+                                @if ($tramite->estado->id != '1')
+                                    <form action="{{ route('derivaciones.create', ['tramite' => $tramite->id]) }}" method="GET" class="d-inline">@csrf<button class="btn btn-success" type="submit" disabled>Derivar</button></form>  
+                                @else
+                                    <form action="{{ route('derivaciones.create', ['tramite' => $tramite->id]) }}" method="GET" class="d-inline">@csrf<button class="btn btn-success" type="submit">Derivar</button></form> 
+                                @endif
                                 <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal-{{$tramite->id}}">Eliminar</button>   
                                     
                                 </div>

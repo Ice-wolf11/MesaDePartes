@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Derivacione extends Model
 {
     use HasFactory;
+    protected $fillable = ['trabajadore_id','tramite_id'];
 
     //relacion inversa uno a muchos con tramite
     public function tramite(){

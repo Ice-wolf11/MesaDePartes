@@ -41,6 +41,10 @@ class trabajadoreController extends Controller
      */
     public function store(StoreTrabajadoreRequest $request)
     {
+        $firstName = explode(' ', trim($request->validated()['nombre']))[0];
+        $lastName = explode(' ', trim($request->validated()['apellido']))[0];
+        $fullName = $firstName . ' ' . $lastName;
+
         $fieldHash = Hash::make($request->password);
         //Modificar el valor de password en nuestro request
         $request->merge(['password' => $fieldHash]);
@@ -51,7 +55,7 @@ class trabajadoreController extends Controller
             //Encriptar contraseña
            
             $user = User::create([
-                'name' => $request->validated()['nombre'],
+                'name' => $fullName,
                 'email' => $request->validated()['email'],
                 'password' => $request->validated()['password'],
 

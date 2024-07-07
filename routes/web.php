@@ -26,9 +26,11 @@ Route::view('/login', 'auth.login')->name('login');
 //controladores
 Route::resource('tramites', tramiteController::class);
 Route::resource('personas', personaController::class);
-Route::resource('derivaciones', derivacioneController::class);
+Route::get('derivaciones/create/{tramite}', [derivacioneController::class, 'create'])->name('derivaciones.create');
+Route::resource('derivaciones', derivacioneController::class)->except(['create']);
+Route::get('areas/{area_id}/trabajadores', [DerivacioneController::class, 'getTrabajadoresByArea']);
 Route::resource('areas', areaController::class);
-Route::resource('users', userController::class);
+//Route::resource('users', userController::class);
 Route::resource('trabajadores', trabajadoreController::class);
 //tramites
 Route::get('tramites/{id}/ver-pdf', [tramiteController::class, 'verPdf'])->name('tramites.ver-pdf');
