@@ -1,13 +1,24 @@
-@extends('template')
+@extends('layouts.template')
 
 @section('title','panel')
 
 @push('css')
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endpush
 
 
 @section('content')
+@if (session('success'))
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+        let message = "{{ session('success') }}";
+        Swal.fire(message);
+
+    });
+</script>
+@endif
 <div class="container-fluid px-4">
     <h1 class="mt-4">Bienvenido</h1>
     <ol class="breadcrumb mb-4">

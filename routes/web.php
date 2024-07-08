@@ -6,19 +6,25 @@ use App\Http\Controllers\personaController;
 use App\Http\Controllers\derivacioneController;
 use App\Http\Controllers\areaController;
 use App\Http\Controllers\trabajadoreController;
+use App\Http\Controllers\loginController;
+use App\Http\Controllers\homeController;
+use App\Http\Controllers\logoutController;
+
+
 Route::get('/', function () {
     return view('welcome');
 })->name('index');
 
 //ruta panel-index
+Route::get('/panel',[homeController::class,'index'])->name('panel');
 
-Route::view('/panel', 'panel.index')->name('panel');
 
 
 //login
 
-Route::view('/login', 'auth.login')->name('login');
-
+Route::get('/login', [loginController::class,'index'])->name('login');
+Route::post('/login', [loginController::class,'login']);
+Route::get('/logout',[logoutController::class,'logout'])->name('logout');
 /*Route::get('/login', function () {
     return view('auth.login');
 });*/
@@ -36,7 +42,7 @@ Route::resource('trabajadores', trabajadoreController::class);
 Route::get('tramites/{id}/ver-pdf', [tramiteController::class, 'verPdf'])->name('tramites.ver-pdf');
 
 
-Route::view('/envio', 'tramite.envio')->name('envio');
+//Route::view('/envio', 'tramite.envio')->name('envio');
 Route::view('/seguimiento','tramite.seguimiento')->name('seguimiento');
 
 //errores

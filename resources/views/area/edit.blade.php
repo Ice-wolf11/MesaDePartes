@@ -1,4 +1,4 @@
-@extends('template')
+@extends('layouts.template')
 @section('title','Editar Area')
 @push('css')
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">

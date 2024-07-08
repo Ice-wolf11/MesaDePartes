@@ -45,7 +45,7 @@ class tramiteController extends Controller
      */
     public function create()
     {
-        //
+        return view('tramite.envio');
     }
 
     /**

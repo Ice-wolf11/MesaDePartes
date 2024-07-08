@@ -29,7 +29,7 @@
         <main>
             <div class="contenedor">
                 <div class="columnas">
-                    <a href="{{route("envio")}}" class="card border-success mb-3" style="width: 18rem;">
+                    <a href="{{route("tramites.create")}}" class="card border-success mb-3" style="width: 18rem;">
                         <img src="{{asset('assets/img/Upload-rafiki.svg')}}" class="card-img-top" alt="">
                         <div class="card-body">
                         <h3 class="text-success">Enviar Documento</h3>

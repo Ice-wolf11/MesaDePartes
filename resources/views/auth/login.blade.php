@@ -16,7 +16,7 @@
             <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
                 <!-- Navbar Brand-->
                 <img class="logo" src="{{asset('assets/img/logoppd2018.png')}}" alt="">
-                <a class="navbar-brand ps-3" href="./">Mesa De Partes</a>
+                <a class="navbar-brand ps-3" href="{{route('index')}}">Mesa De Partes</a>
                 <!-- Sidebar Toggle-->
                 
             </nav>
@@ -26,21 +26,33 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-5">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                   
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
                                     <div class="card-body">
-                                        <form>
+                                        @if ($errors -> any())
+                                            
+                                            @foreach ($errors->all() as $item)
+                                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                    {{$item}}
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                </div>
+                                            @endforeach
+                                            
+                                        @endif
+                                        <form action="/login" method="POST">
+                                            @csrf
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
+                                                <input class="form-control" name="email" id="inputEmail" type="email" placeholder="name@example.com" />
                                                 <label for="inputEmail">Email address</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputPassword" type="password" placeholder="Password" />
+                                                <input class="form-control" name="password" id="inputPassword" type="password" placeholder="Password" />
                                                 <label for="inputPassword">Password</label>
                                             </div>
                                             
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 
-                                                <a class="btn btn-primary" href="index.html">Login</a>
+                                                <button type="submit" class="btn btn-primary"><a>Iniciar Sesión</a></button>
                                             </div>
                                         </form>
                                     </div>
