@@ -38,8 +38,14 @@ Route::get('areas/{area_id}/trabajadores', [DerivacioneController::class, 'getTr
 Route::resource('areas', areaController::class);
 //Route::resource('users', userController::class);
 Route::resource('trabajadores', trabajadoreController::class);
-//tramites
+//tramites pdf
 Route::get('tramites/{id}/ver-pdf', [tramiteController::class, 'verPdf'])->name('tramites.ver-pdf');
+Route::get('derivaciones/{id}/ver-pdf', [DerivacioneController::class, 'verPdf'])->name('derivaciones.ver-pdf');
+
+// ver pdf en modal
+Route::get('pdf/{filename}', [tramiteController::class, 'verPdfmod'])->name('pdf.view');
+
+
 
 
 //Route::view('/envio', 'tramite.envio')->name('envio');

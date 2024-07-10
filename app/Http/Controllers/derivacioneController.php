@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreDerivacioneRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Estado;
 use App\Models\Tramite;
 use App\Models\Derivacione;
@@ -15,12 +16,25 @@ use App\Models\Area;
 
 class derivacioneController extends Controller
 {
+
+    public function verPdf($id)
+    {
+        $derivacion = Derivacione::findOrFail($id);
+        $filePath = 'public/tramites/' . $derivacion->tramite->ruta_archivo;
+
+        if (Storage::exists($filePath)) {
+            return Storage::response($filePath);
+        } else {
+            abort(404, 'Archivo no encontrado.');
+        }
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('derivacione.index');
+        $derivacion = Derivacione::with('trabajador', 'tramite')->latest()->get();
+        return view('derivacione.index',['derivaciones' => $derivacion]);
     }
 
     /**
@@ -96,6 +110,23 @@ class derivacioneController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $derivacion = Derivacione::findOrFail($id); // Utiliza findOrFail para manejar el caso en que no se encuentre el trámite
+
+        
+
+        try {
+            // Comienza una transacción para asegurarte de que ambas operaciones (eliminación del archivo y del registro) se completen
+            DB::beginTransaction();
+            // Elimina el registro del trámite
+            $derivacion->delete();
+
+            DB::commit();
+
+            return redirect()->route('derivaciones.index')->with('success', 'Operacion realizada con éxito');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('derivaciones.index')->with('error', 'Ocurrió un error: ' . $e->getMessage());
+        }
     }
 }

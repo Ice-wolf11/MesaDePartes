@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('derivaciones', function (Blueprint $table) {
             $table->id();
             $table->foreignId('trabajadore_id')->nullable()->constrained('trabajadores')->onDelete('set null');
-            $table->foreignId('tramite_id')->constrained('tramites');
+            $table->foreignId('tramite_id')->constrained('tramites')->onDelete('cascade');
             $table->timestamps();
         });
     }

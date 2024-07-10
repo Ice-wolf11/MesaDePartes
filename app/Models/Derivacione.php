@@ -16,6 +16,6 @@ class Derivacione extends Model
     }
     //relacion inversa con usuario
     public function trabajador(){
-        return $this->belongsTo(Trabajadore::class);
+        return $this->belongsTo(Trabajadore::class,'trabajadore_id');
     }
 }

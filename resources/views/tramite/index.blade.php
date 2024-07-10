@@ -51,19 +51,37 @@
                                 <td><p  class="badge text-bg-danger">{{$tramite->estado->descripcion}}</p></td>
                             @endif
                             <td>{{$tramite->created_at}}</td>
-                            <td><a href="{{ route('tramites.ver-pdf', $tramite->id) }}">Abrir</a></td>
+                            <td><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#verModal-{{$tramite->id}}" >Ver</button></td>
                             <td><div class="d-grid gap-2 d-md-block">
-                                @if ($tramite->estado->id != '1')
-                                    <form action="{{ route('derivaciones.create', ['tramite' => $tramite->id]) }}" method="GET" class="d-inline">@csrf<button class="btn btn-success" type="submit" disabled>Derivar</button></form>  
+                                <form action="{{ route('derivaciones.create', ['tramite' => $tramite->id]) }}" method="GET" class="d-inline">@csrf<button class="btn btn-success" type="submit">Derivar</button></form> 
+                                @if ($tramite->estado->id == '2')
+                                    <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal-{{$tramite->id}}" disabled>Eliminar</button>
                                 @else
-                                    <form action="{{ route('derivaciones.create', ['tramite' => $tramite->id]) }}" method="GET" class="d-inline">@csrf<button class="btn btn-success" type="submit">Derivar</button></form> 
+                                    <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal-{{$tramite->id}}">Eliminar</button>
                                 @endif
-                                <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal-{{$tramite->id}}">Eliminar</button>   
+                                 
                                     
                                 </div>
                             </td>
                            </tr>
-                            <!-- Modal -->
+                            <!-- Modal ver tramite -->
+                            <div class="modal fade" id="verModal-{{$tramite->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <H1>Documento</H1>
+                                        </div>
+                                        <div class="modal-body">
+                                            <iframe src="{{ route('tramites.ver-pdf', $tramite->id) }}" width="100%" height="500px"></iframe>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                          
+
+                            <!-- Modal eliminar -->
                             <div class="modal fade" id="confirmModal-{{$tramite->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                 <div class="modal-content">

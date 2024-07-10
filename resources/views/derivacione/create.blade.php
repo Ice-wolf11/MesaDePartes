@@ -47,7 +47,7 @@
                     
                 </div>
                 <div class="col-md-6">
-                    <a href="{{ route('tramites.ver-pdf', $tramite->id) }}" class="btn btn-primary mt-4">Ver Documento</a>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#verModal-{{$tramite->id}}" >Ver Documento</button>
                 </div>
             </div>
         </div>
@@ -83,6 +83,22 @@
         <div class="col-12">
             <button type="submit" class="btn btn-primary mt-4">Enviar</button>
         </div>
+        <!-- Modal ver tramite -->
+        <div class="modal fade" id="verModal-{{$tramite->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <H1>Documento</H1>
+                    </div>
+                    <div class="modal-body">
+                        <iframe src="{{ route('tramites.ver-pdf', $tramite->id) }}" width="100%" height="500px"></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>  
     </form>
 </div>
 

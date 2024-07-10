@@ -16,6 +16,7 @@ use App\Models\Area;
 
 class tramiteController extends Controller
 {
+   
     public function verPdf($id)
     {
         $tramite = Tramite::findOrFail($id);
@@ -91,7 +92,7 @@ class tramiteController extends Controller
         }catch(Exception $e){
             DB::rollBack();
         }
-        return redirect()->route('envio')->with('success','Documento enviado correctamente');
+        return redirect()->route('tramites.create')->with('success','Documento enviado correctamente');
         
     }
 

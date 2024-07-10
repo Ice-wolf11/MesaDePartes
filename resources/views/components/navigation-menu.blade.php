@@ -18,7 +18,7 @@
                         <a class="nav-link" href="layout-static.html">Mis Tramites Pendientes</a>
                         <a class="nav-link" href="layout-sidenav-light.html">Tramites Revisados</a>
                         <a class="nav-link" href="{{route('tramites.index')}}">Ver Todos los Tramites</a>
-                        <a class="nav-link" href="layout-sidenav-light.html">Tramites Asignados</a>
+                        <a class="nav-link" href="{{route('derivaciones.index')}}">Tramites Asignados</a>
                     </nav>
                 </div>
                 <div class="sb-sidenav-menu-heading">Panel de Administrador</div>
