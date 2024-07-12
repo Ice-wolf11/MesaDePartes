@@ -6,23 +6,19 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRevisioneRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'resolucion' => 'required',
+            'respuesta' => 'required|max:255',
+            'formFile'   => 'nullable|mimes:pdf|max:2048',
+            'trabajador_id' => 'required',
+            'tramite_id' => 'required',
         ];
     }
 }

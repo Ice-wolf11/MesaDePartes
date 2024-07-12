@@ -11,6 +11,7 @@ use App\Models\Estado;
 use App\Models\Tramite;
 use App\Models\User;
 use App\Models\Derivacione;
+use App\Models\Revisione;
 use App\Models\Area;
 
 
@@ -36,9 +37,9 @@ class tramiteController extends Controller
         $tramite = Tramite::with('persona', 'estado')->latest()->get();
 
         //dd($tramite);
-
+        $revisione = Revisione::all();
         $derivacione = Derivacione::all();
-        return view('tramite.index',['tramites' => $tramite,'derivacione'=>$derivacione]);
+        return view('tramite.index',['tramites' => $tramite,'derivacione'=>$derivacione,'revisione'=>$revisione]);
     }
 
     /**

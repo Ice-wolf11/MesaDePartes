@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('descripcion',255);
             $table->string('ruta_archivo',255)->nullable();
+            $table->string('estado_revision')->nullable();
             $table->foreignId('trabajadore_id')->nullable()->constrained('trabajadores')->onDelete('set null');
             $table->foreignId('tramite_id')->constrained('tramites')->onDelete('cascade');
             $table->timestamps();

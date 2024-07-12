@@ -19,7 +19,7 @@
             <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
                 <!-- Navbar Brand-->
                 <img class="logo" src="{{asset('assets/img/logoppd2018.png')}}" alt="">
-                <a class="navbar-brand ps-3" href="./">Mesa De Partes</a>
+                <a class="navbar-brand ps-3" href="{{route('index')}}">Mesa De Partes</a>
                 <!-- Sidebar Toggle-->
                 <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" action="{{route('login')}}" method="get">
                     <button class="btn btn-primary" type="submit">Iniciar sesión</button>

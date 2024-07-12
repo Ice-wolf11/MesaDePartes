@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('folios',2);
             $table->string('asunto',255);
             $table->string('ruta_archivo',255);
-            $table->string('cod_seguridad');
+            $table->string('cod_seguridad')->unique();
             $table->foreignId('estado_id')->nullable()->constrained('estados')->onDelete('set null');
             $table->foreignId('persona_id')->constrained('personas')->onDelete('cascade');
             $table->timestamps();
