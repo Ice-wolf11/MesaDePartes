@@ -31,6 +31,9 @@ Route::get('/logout',[logoutController::class,'logout'])->name('logout');
 });*/
 
 //controladores
+// En tu archivo de rutas
+Route::get('tramites/{id}/confirmacion', [tramiteController::class, 'confirmacion'])->name('tramites.confirmacion');
+Route::get('tramites/buscar', [tramiteController::class, 'buscar'])->name('tramites.buscar');
 Route::resource('tramites', tramiteController::class);
 Route::resource('personas', personaController::class);
 Route::get('derivaciones/create/{tramite}', [derivacioneController::class, 'create'])->name('derivaciones.create');
@@ -55,7 +58,7 @@ Route::get('pdf/{filename}', [tramiteController::class, 'verPdfmod'])->name('pdf
 
 
 
-
+Route::view('/detalle','tramite.detalle')->name('detalle');
 Route::view('/seguimiento','tramite.show')->name('seguimiento');
 
 //errores

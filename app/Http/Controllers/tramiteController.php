@@ -29,6 +29,45 @@ class tramiteController extends Controller
             abort(404, 'Archivo no encontrado.');
         }
     }
+
+    /**
+ * Show the confirmation view after successfully storing a tramite.
+ */
+    public function confirmacion($id)
+    {
+        $tramite = Tramite::findOrFail($id);
+        // Puedes cargar relaciones adicionales si las necesitas
+        $tramite->load('persona', 'estado');
+
+        return view('tramite.confirmacion', compact('tramite'));
+    }
+
+    public function buscar(Request $request)
+    {
+        $numeroExpediente = $request->input('expediente');
+        $codigoSeguridad = $request->input('codigoSeguridad');
+    
+        // Encuentra el tramite por número de expediente y código de seguridad
+        $tramite = Tramite::where('id', $numeroExpediente)
+                    ->where('cod_seguridad', $codigoSeguridad)
+                    ->with('persona', 'estado')
+                    ->first();
+    
+        if ($tramite) {
+            return response()->json([
+                'success' => true,
+                'data' => $tramite
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'No se encontró el trámite.'
+            ]);
+        }
+    }
+    
+
+
     /**
      * Display a listing of the resource.
      */
@@ -87,13 +126,14 @@ class tramiteController extends Controller
                 'persona_id' => $persona->id
                 
             ]);
+            
             // Crear un nuevo trámite asociado a la persona
             
             DB::commit();
         }catch(Exception $e){
             DB::rollBack();
         }
-        return redirect()->route('tramites.create')->with('success','Documento enviado correctamente');
+        return redirect()->route('tramites.confirmacion', ['id' => $persona->id])->with('success', 'Documento enviado correctamente');
         
     }
 
