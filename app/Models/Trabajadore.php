@@ -22,9 +22,9 @@ class Trabajadore extends Model
     }
 
     //relacion de muchos a muchos con tramites
-    public function tramites(){
+    /*public function tramites(){
         return $this->belongsToMany(Tramite::class)->withTimestamps()->withPivot('fecha_hora');//nota=> acuerdate de agregar el campo fecha en la tabla revisiones
-    }
+    }*/
     
     //metodo de relacion principal uno a muchos con revisiones
     public function revisiones(){

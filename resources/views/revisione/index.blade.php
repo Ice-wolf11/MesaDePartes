@@ -107,7 +107,11 @@
                             <label for="descripcion" class="form-label">Descripción de la respuesta:</label>
                             <textarea class="form-control" id="descripcion" rows="3" disabled>{{ $revision->descripcion}}</textarea>
                         </div>
-                        <iframe src="{{ route('revisiones.ver-pdf', $revision->id) }}" width="100%" height="350px"></iframe>
+                        @if ($revision->ruta_archivo != null)
+                            <iframe src="{{ route('revisiones.ver-pdf', $revision->id) }}" width="100%" height="350px"></iframe>
+                        @else
+                            <H3>Documento no disponible</H3>
+                        @endif
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

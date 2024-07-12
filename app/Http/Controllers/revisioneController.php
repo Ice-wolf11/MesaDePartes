@@ -57,6 +57,7 @@ class revisioneController extends Controller
      */
     public function store(StoreRevisioneRequest $request)
     {
+        //dd($request);
         try {
             DB::beginTransaction();
             if ($request->hasFile('formFile')) {
@@ -79,10 +80,24 @@ class revisioneController extends Controller
                 'tramite_id' => $request->validated()['tramite_id'],
             ]);
 
-            $tramite = Tramite::findOrFail($request->input('tramite_id'));
-            $tramite->update([
-                'estado_id' => $request->validated()['resolucion'],
-            ]);
+            if ($request->trabajador != null ){
+                $derivacione = Derivacione::create([
+                    'trabajadore_id' => $request->validated()['trabajador'],
+                    'tramite_id' => $request->validated()['tramite_id'],
+                ]);
+    
+                $tramite = Tramite::findOrFail($request->input('tramite_id'));
+                $tramite->update([
+                    'estado_id' => '2',
+                ]);
+            }else{
+                $tramite = Tramite::findOrFail($request->input('tramite_id'));
+                $tramite->update([
+                    'estado_id' => $request->validated()['resolucion'],
+                ]);
+            }
+
+            
 
             DB::commit();
         } catch(Exception $e) {
@@ -92,12 +107,24 @@ class revisioneController extends Controller
         return redirect()->route('revisiones.index')->with('success','Operacion realizada con éxito');
     }
 
+
+
+
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+        // Obtener el usuario autenticado
+        $user = auth()->user();
+
+        // Obtener las derivaciones del trabajador asociado al usuario autenticado
+        $revisiones = Revisione::whereHas('trabajador', function($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->get();
+
+        // Retornar una vista con las derivaciones encontradas
+        return view('revisione.index', compact('revisiones'));
     }
 
     /**

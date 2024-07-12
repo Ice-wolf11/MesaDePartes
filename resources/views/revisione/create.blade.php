@@ -83,6 +83,35 @@
 
         </div>
 
+        <!--seccion para derivar de ser el caso-->
+        <div class="container w-100 border border-3 corder-primary rounded p-4 mt-3">
+            <div class="row g-3">
+                <H4 class="text-center">Derivar... (opcional)</H4>
+                <div class="col-md-6">
+                    <label for="area" class="form-label">Area:</label>
+                    <select id="area" name="area" class="form-select" aria-label="Default select example">
+                        <option selected>Seleccione...</option>
+                        @foreach ($areas as $area)
+                            <option value="{{ $area->id }}">{{ $area->nombre }}</option>
+                        @endforeach
+                    </select>
+                    @error('area')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
+                <div class="col-md-6">
+                    <label for="trabajador" class="form-label">Trabajador:</label>
+                    <select id="trabajador" name="trabajador" class="form-select">
+                        <option selected></option>
+                    </select>
+                    @error('trabajador')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+            </div>
+        </div>
+
         <div class="col-12">
             <button type="submit" class="btn btn-primary mt-4">Enviar</button>
         </div>
@@ -107,7 +136,30 @@
 </div>
 
 @push('js')
+<script>
+    document.getElementById('area').addEventListener('change', function () {
+        var areaId = this.value;
 
+        // Limpia el select de trabajador
+        var trabajadorSelect = document.getElementById('trabajador');
+        trabajadorSelect.innerHTML = '<option selected>Seleccione...</option>';
+
+        if (areaId) {
+            fetch('/areas/' + areaId + '/trabajadores')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(trabajador => {
+                        var option = document.createElement('option');
+                        var nombre = trabajador.nombre+" "+trabajador.apellido;
+                        option.value = trabajador.id;
+                        option.text = nombre;
+                        trabajadorSelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    });
+</script>
 @endpush
 
 @endsection

@@ -80,13 +80,36 @@ class derivacioneController extends Controller
         return redirect()->route('tramites.index')->with('success','Operacion realizada con éxito');
     }
     
+    //buscar derivaciones por usuario
+    /*public function showDerivaciones()
+    {
+        // Obtener el usuario autenticado
+        $user = auth()->user();
+
+        // Obtener las derivaciones del trabajador asociado al usuario autenticado
+        $derivaciones = Derivacione::whereHas('trabajador', function($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->get();
+
+        // Retornar una vista con las derivaciones encontradas
+        return view('derivacione.pendientes', compact('derivaciones'));
+    }*/
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+        // Obtener el usuario autenticado
+        $user = auth()->user();
+
+        // Obtener las derivaciones del trabajador asociado al usuario autenticado
+        $derivaciones = Derivacione::whereHas('trabajador', function($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->get();
+
+        // Retornar una vista con las derivaciones encontradas
+        return view('derivacione.show', compact('derivaciones'));
     }
 
     /**

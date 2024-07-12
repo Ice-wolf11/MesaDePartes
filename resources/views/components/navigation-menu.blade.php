@@ -15,8 +15,9 @@
                 </a>
                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="layout-static.html">Mis Tramites Pendientes</a>
-                        <a class="nav-link" href="{{route('revisiones.index')}}">Tramites Revisados</a>
+                        <a class="nav-link" href="{{route('derivaciones.show',['id' => auth()->user()->id])}}">Mis Tramites Pendientes</a>
+                        <a class="nav-link" href="{{route('revisiones.show',['id' => auth()->user()->id])}}">Tramites Revisados</a>
+                        <a class="nav-link" href="{{route('revisiones.index')}}">Ver Todas las revisiones</a>
                         <a class="nav-link" href="{{route('tramites.index')}}">Ver Todos los Tramites</a>
                         <a class="nav-link" href="{{route('derivaciones.index')}}">Tramites Asignados</a>
                     </nav>

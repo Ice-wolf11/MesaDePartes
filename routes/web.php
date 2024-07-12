@@ -34,10 +34,13 @@ Route::get('/logout',[logoutController::class,'logout'])->name('logout');
 Route::resource('tramites', tramiteController::class);
 Route::resource('personas', personaController::class);
 Route::get('derivaciones/create/{tramite}', [derivacioneController::class, 'create'])->name('derivaciones.create');
-Route::resource('derivaciones', derivacioneController::class)->except(['create']);
+Route::get('/derivaciones/{id}', [derivacioneController::class, 'show'])->name('derivaciones.show');
+
+Route::resource('derivaciones', derivacioneController::class)->except(['create','show']);
 Route::get('revisiones/create/{tramite}', [revisioneController::class, 'create'])->name('revisiones.create');
-Route::resource('revisiones',revisioneController::class)->except(['create']);;
-Route::get('areas/{area_id}/trabajadores', [DerivacioneController::class, 'getTrabajadoresByArea']);
+Route::get('/revisiones/{id}', [revisioneController::class, 'show'])->name('revisiones.show');
+Route::resource('revisiones',revisioneController::class)->except(['create','show']);;
+Route::get('areas/{area_id}/trabajadores', [derivacioneController::class, 'getTrabajadoresByArea']);
 Route::resource('areas', areaController::class);
 //Route::resource('users', userController::class);
 Route::resource('trabajadores', trabajadoreController::class);

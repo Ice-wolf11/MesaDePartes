@@ -53,7 +53,7 @@
                             <td>{{$tramite->created_at}}</td>
                             <td><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#verModal-{{$tramite->id}}" >Ver</button></td>
                             <td><div class="d-grid gap-2 d-md-block">
-                                <form action="{{ route('derivaciones.create', ['tramite' => $tramite->id]) }}" method="GET" class="d-inline">@csrf<button class="btn btn-success" type="submit">Derivar</button></form> 
+                                <!--<form action="{{ route('derivaciones.create', ['tramite' => $tramite->id]) }}" method="GET" class="d-inline">@csrf<button class="btn btn-success" type="submit">Derivar</button></form> -->
                                 <form action="{{ route('revisiones.create', ['tramite' => $tramite->id]) }}" method="GET" class="d-inline">@csrf<button class="btn btn-warning" type="submit">Revisar</button></form> 
                                 @if ($tramite->estado->id == '2')
                                     <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal-{{$tramite->id}}" disabled>Eliminar</button>

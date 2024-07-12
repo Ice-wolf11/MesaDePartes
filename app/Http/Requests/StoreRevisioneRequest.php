@@ -17,6 +17,7 @@ class StoreRevisioneRequest extends FormRequest
             'resolucion' => 'required',
             'respuesta' => 'required|max:255',
             'formFile'   => 'nullable|mimes:pdf|max:2048',
+            'trabajador' => 'nullable',
             'trabajador_id' => 'required',
             'tramite_id' => 'required',
         ];
