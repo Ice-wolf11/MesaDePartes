@@ -54,7 +54,8 @@ Route::get('pdf/{filename}', [tramiteController::class, 'verPdfmod'])->name('pdf
 
 
 
-//Route::view('/envio', 'tramite.envio')->name('envio');
+
+
 Route::view('/seguimiento','tramite.show')->name('seguimiento');
 
 //errores
