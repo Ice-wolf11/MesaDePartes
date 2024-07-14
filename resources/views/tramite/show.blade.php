@@ -172,7 +172,117 @@
 @endpush
 
 @section('content')
-    @component('tramite.components.buscar')@endcomponent
-    @component('tramite.components.datos-remitente')@endcomponent
-    @component('tramite.components.datos-revision')@endcomponent
+    <!--buscar tramite-->
+    <div class="search-bar">     
+        <form id="form-busqueda">
+            <div class="form-group">
+                <label for="expediente">Nº Expediente:</label>
+                <input type="text" id="expediente" name="expediente">
+            </div>
+            <div class="form-group">
+                <label for="codigoSeguridad">Cod. Seguridad:</label>
+                <input type="text" id="codigoSeguridad" name="codigoSeguridad">
+            </div>
+            <button type="submit" class="btn1 btn-success">Buscar</button>
+            <button type="reset" class="btn1 btn-success2">Limpiar...</button>
+        </form>
+    </div>
+    <!--datos del remitente-->
+    <div class="info-block">
+        <div class="info-column">
+            <div class="info-group">
+                <label class="info-label">Fecha Hora:</label>
+                <span class="info-value fechaHora">{{ $fechaHora ?? 'N/A' }}</span>
+            </div>
+            <div class="info-group">
+                <label class="info-label">Nº Expediente:</label>
+                <span class="info-value numeroExpediente">{{ $numeroExpediente ?? 'N/A' }}</span>
+            </div>
+            <div class="info-group">
+                <label class="info-label">Nombres:</label>
+                <span class="info-value nombres">{{ $nombres ?? 'N/A' }}</span>
+            </div>
+            <div class="info-group">
+                <label class="info-label">Estado:</label>
+                <span class="info-value estado">{{ $estado ?? 'N/A' }}</span>
+            </div>
+        </div>
+        <div class="info-column">
+            <div class="info-group">
+                <label class="info-label">Tipo Documento:</label>
+                <span class="info-value tipoDocumento">{{ $tipoDocumento ?? 'N/A' }}</span>
+            </div>
+            <div class="info-group">
+                <label class="info-label">Asunto:</label>
+                <span class="info-value asunto">{{ $asunto ?? 'N/A' }}</span>
+            </div>
+            <div class="info-group">
+                <label class="info-label">Nº Documento:</label>
+                <span class="info-value numeroDocumento">{{ $numeroDocumento ?? 'N/A' }}</span>
+            </div>
+            <div class="info-group">
+                <label class="info-label">Folios:</label>
+                <span class="info-value folios">{{ $folios ?? 'N/A' }}</span>
+            </div>
+        </div>
+    </div>
+
+    <!--datos-revision-->
+    <div class="seguimiento-expediente">
+        <h2>Seguimiento del Expediente</h2>
+        <table class="table-seguimiento">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Fecha Hora</th>
+                    <th>Descripción</th>
+                    <th>Adjunto</th>
+                    <th>Usuario</th>
+                </tr>
+            </thead>
+            <tbody id="tbody-seguimiento">
+                
+            </tbody>
+        </table>
+    </div>
+ 
 @endsection
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#form-busqueda').on('submit', function(e) {
+            e.preventDefault();
+
+            var expediente = $('#expediente').val();
+            var codigoSeguridad = $('#codigoSeguridad').val();
+
+            $.ajax({
+                url: "{{ route('tramites.buscar') }}",
+                method: 'GET',
+                data: {
+                    expediente: expediente,
+                    codigoSeguridad: codigoSeguridad
+                },
+                success: function(response) {
+                    if (response.success) {
+                        // Actualizar la vista con los datos obtenidos
+                        var tramite = response.data;
+                        var formattedDate = moment(tramite.created_at).format('DD/MM/YYYY HH:mm:ss'); // Formatear la fecha
+
+                        $('.fechaHora').text(formattedDate);
+                        $('.numeroExpediente').text(tramite.id);
+                        $('.nombres').text(tramite.persona.nombre);
+                        $('.estado').text(tramite.estado.descripcion);
+                        $('.tipoDocumento').text(tramite.tipo_tramite);
+                        $('.asunto').text(tramite.asunto);
+                        $('.numeroDocumento').text(tramite.persona.numero_documento);
+                        $('.folios').text(tramite.folios);
+                    } else {
+                        alert(response.message);
+                    }
+                }
+            });
+        });
+    });
+</script>

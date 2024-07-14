@@ -52,7 +52,7 @@ Route::get('tramites/{id}/ver-pdf', [tramiteController::class, 'verPdf'])->name(
 Route::get('derivaciones/{id}/ver-pdf', [derivacioneController::class, 'verPdf'])->name('derivaciones.ver-pdf');
 Route::get('revisiones/{id}/ver-pdf', [revisioneController::class, 'verPdf'])->name('revisiones.ver-pdf');
 // ver pdf en modal
-Route::get('pdf/{filename}', [tramiteController::class, 'verPdfmod'])->name('pdf.view');
+//Route::get('pdf/{filename}', [tramiteController::class, 'verPdfmod'])->name('pdf.view');
 
 
 
