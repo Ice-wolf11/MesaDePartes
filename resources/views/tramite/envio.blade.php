@@ -20,6 +20,7 @@
             <button type="submit">Enviar</button>
         </div>
     </form>
+    <script src="{{asset('js/formularios.js')}}" crossorigin="anonymous"></script> 
 @endsection
 @push('js')
     
