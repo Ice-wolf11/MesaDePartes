@@ -129,9 +129,14 @@
         }
 
         .table-seguimiento {
+            
             width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .table-seguimiento th,
@@ -241,6 +246,30 @@
             <!-- Aquí se llenarán las filas dinámicamente -->
         </tbody>
     </table>
+
+    <!--modal descripcion-->
+    <!-- Modal (con IDs dinámicos) -->
+    <div class="modal fade" id="revisionModal" tabindex="-1" aria-labelledby="revisionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="revisionModalLabel">Respuesta</h1>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción de la respuesta:</label>
+                        <textarea class="form-control" id="modal-descripcion" rows="3" disabled></textarea>
+                    </div>
+                    <iframe id="modal-pdf" width="100%" height="350px"></iframe>
+                    <h3 id="modal-no-doc" class="d-none">Documento no disponible</h3>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
  
 @endsection
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -284,10 +313,26 @@
                         var fila = `<tr>
                             <td>${index + 1}</td>
                             <td>${moment(revision.created_at).format('DD/MM/YYYY HH:mm:ss')}</td>
-                            <td>${revision.descripcion}</td>
-                            <td>${revision.trabajador.nombre}</td> <!-- Cambiado a trabajador -->
+                            <td><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#revisionModal" data-descripcion="${revision.descripcion}" data-pdf="${revision.ruta_archivo ? '{{ route('revisiones.ver-pdf', '') }}/' + revision.id : ''}">Ver respuesta</button></td>
+                            <td>${revision.trabajador.nombre + ' ' +revision.trabajador.apellido}</td>
                         </tr>`;
                         tbodySeguimiento.append(fila);
+                    });
+                    $('#revisionModal').on('show.bs.modal', function(event) {
+                        var button = $(event.relatedTarget);
+                        var descripcion = button.data('descripcion');
+                        var pdfUrl = button.data('pdf');
+                        
+                        var modal = $(this);
+                        modal.find('#modal-descripcion').val(descripcion);
+
+                        if (pdfUrl) {
+                            modal.find('#modal-pdf').attr('src', pdfUrl).removeClass('d-none');
+                            modal.find('#modal-no-doc').addClass('d-none');
+                        } else {
+                            modal.find('#modal-pdf').addClass('d-none');
+                            modal.find('#modal-no-doc').removeClass('d-none');
+                        }
                     });
                 } else {
                     alert(response.message);
