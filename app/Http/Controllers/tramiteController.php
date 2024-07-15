@@ -47,11 +47,18 @@ class tramiteController extends Controller
         $numeroExpediente = $request->input('expediente');
         $codigoSeguridad = $request->input('codigoSeguridad');
     
+        if (empty($numeroExpediente) || empty($codigoSeguridad)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Por favor, proporcione todos los campos requeridos.'
+            ]);
+        }
+    
         // Encuentra el tramite por número de expediente y código de seguridad
         $tramite = Tramite::where('id', $numeroExpediente)
-                    ->where('cod_seguridad', $codigoSeguridad)
-                    ->with('persona', 'estado')
-                    ->first();
+            ->where('cod_seguridad', $codigoSeguridad)
+            ->with(['persona', 'estado', 'revisiones.trabajador']) // Cargar la relación trabajador
+            ->first();
     
         if ($tramite) {
             return response()->json([
@@ -61,10 +68,11 @@ class tramiteController extends Controller
         } else {
             return response()->json([
                 'success' => false,
-                'message' => 'No se encontró el trámite.'
+                'message' => 'No se encontró el trámite con el expediente y código de seguridad proporcionados.'
             ]);
         }
     }
+    
     
 
 

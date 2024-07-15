@@ -228,61 +228,73 @@
     </div>
 
     <!--datos-revision-->
-    <div class="seguimiento-expediente">
-        <h2>Seguimiento del Expediente</h2>
-        <table class="table-seguimiento">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Fecha Hora</th>
-                    <th>Descripción</th>
-                    <th>Adjunto</th>
-                    <th>Usuario</th>
-                </tr>
-            </thead>
-            <tbody id="tbody-seguimiento">
-                
-            </tbody>
-        </table>
-    </div>
+    <table class="table-seguimiento">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Fecha Hora</th>
+                <th>Descripción</th>
+                <th>Usuario</th>
+            </tr>
+        </thead>
+        <tbody id="tbody-seguimiento">
+            <!-- Aquí se llenarán las filas dinámicamente -->
+        </tbody>
+    </table>
  
 @endsection
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $('#form-busqueda').on('submit', function(e) {
-            e.preventDefault();
+  $(document).ready(function() {
+    $('#form-busqueda').on('submit', function(e) {
+        e.preventDefault();
 
-            var expediente = $('#expediente').val();
-            var codigoSeguridad = $('#codigoSeguridad').val();
+        var expediente = $('#expediente').val();
+        var codigoSeguridad = $('#codigoSeguridad').val();
 
-            $.ajax({
-                url: "{{ route('tramites.buscar') }}",
-                method: 'GET',
-                data: {
-                    expediente: expediente,
-                    codigoSeguridad: codigoSeguridad
-                },
-                success: function(response) {
-                    if (response.success) {
-                        // Actualizar la vista con los datos obtenidos
-                        var tramite = response.data;
-                        var formattedDate = moment(tramite.created_at).format('DD/MM/YYYY HH:mm:ss'); // Formatear la fecha
+        $.ajax({
+            url: "{{ route('tramites.buscar') }}",
+            method: 'GET',
+            data: {
+                expediente: expediente,
+                codigoSeguridad: codigoSeguridad
+            },
+            success: function(response) {
+                if (response.success) {
+                    // Actualizar la vista con los datos obtenidos
+                    var tramite = response.data;
+                    var formattedDate = moment(tramite.created_at).format('DD/MM/YYYY HH:mm:ss'); // Formatear la fecha
 
-                        $('.fechaHora').text(formattedDate);
-                        $('.numeroExpediente').text(tramite.id);
-                        $('.nombres').text(tramite.persona.nombre);
-                        $('.estado').text(tramite.estado.descripcion);
-                        $('.tipoDocumento').text(tramite.tipo_tramite);
-                        $('.asunto').text(tramite.asunto);
-                        $('.numeroDocumento').text(tramite.persona.numero_documento);
-                        $('.folios').text(tramite.folios);
-                    } else {
-                        alert(response.message);
-                    }
+                    $('.fechaHora').text(formattedDate);
+                    $('.numeroExpediente').text(tramite.id);
+                    $('.nombres').text(tramite.persona.nombre);
+                    $('.estado').text(tramite.estado.descripcion);
+                    $('.tipoDocumento').text(tramite.tipo_tramite);
+                    $('.asunto').text(tramite.asunto);
+                    $('.numeroDocumento').text(tramite.persona.numero_documento);
+                    $('.folios').text(tramite.folios);
+
+                    // Actualizar la tabla de seguimiento
+                    var revisiones = tramite.revisiones;
+                    var tbodySeguimiento = $('#tbody-seguimiento');
+                    tbodySeguimiento.empty(); // Limpiar la tabla antes de agregar nuevas filas
+
+                    revisiones.forEach(function(revision, index) {
+                        var fila = `<tr>
+                            <td>${index + 1}</td>
+                            <td>${moment(revision.created_at).format('DD/MM/YYYY HH:mm:ss')}</td>
+                            <td>${revision.descripcion}</td>
+                            <td>${revision.trabajador.nombre}</td> <!-- Cambiado a trabajador -->
+                        </tr>`;
+                        tbodySeguimiento.append(fila);
+                    });
+                } else {
+                    alert(response.message);
                 }
-            });
+            }
         });
     });
+});
+
 </script>
