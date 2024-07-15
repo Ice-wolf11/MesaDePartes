@@ -313,7 +313,7 @@
                         var fila = `<tr>
                             <td>${index + 1}</td>
                             <td>${moment(revision.created_at).format('DD/MM/YYYY HH:mm:ss')}</td>
-                            <td><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#revisionModal" data-descripcion="${revision.descripcion}" data-pdf="${revision.ruta_archivo ? '{{ route('revisiones.ver-pdf', '') }}/' + revision.id : ''}">Ver respuesta</button></td>
+                            <td><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#revisionModal" data-descripcion="${revision.descripcion}" data-pdf="${revision.ruta_archivo ? '{{ route('revisiones.ver-pdf', ['id' => 'ID_PLACEHOLDER']) }}'.replace('ID_PLACEHOLDER', revision.id) : ''}">Ver respuesta</button></td>
                             <td>${revision.trabajador.nombre + ' ' +revision.trabajador.apellido}</td>
                         </tr>`;
                         tbodySeguimiento.append(fila);
