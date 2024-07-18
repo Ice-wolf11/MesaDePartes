@@ -96,6 +96,7 @@ class revisioneController extends Controller
                     'estado_id' => $request->validated()['resolucion'],
                 ]);
             }
+            
 
             
 
@@ -104,7 +105,7 @@ class revisioneController extends Controller
             DB::rollBack();
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
-        return redirect()->route('revisiones.index')->with('success','Operacion realizada con éxito');
+        return redirect()->route('revisiones.show',['id' => auth()->user()->id])->with('success','Operacion realizada con éxito');
     }
 
 
@@ -159,12 +160,12 @@ class revisioneController extends Controller
             $derivacion->delete();
 
             DB::commit();
-
-            return redirect()->route('derivaciones.index')->with('success', 'Operacion realizada con éxito');
+            
+            return redirect()->route('revisiones.show',['id' => auth()->user()->id])->with('success', 'Operacion realizada con éxito');
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->route('derivaciones.index')->with('error', 'Ocurrió un error: ' . $e->getMessage());
+            return redirect()->route('revisiones.show',['id' => auth()->user()->id])->with('error', 'Ocurrió un error: ' . $e->getMessage());
         }
     }
 }
