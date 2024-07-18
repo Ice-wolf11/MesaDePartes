@@ -1,6 +1,7 @@
 <!-- tramite/confirmacion.blade.php -->
 @extends('tramite.partials.principal')
 @section('content')
+@include('layouts.partials.alert')
     <div class="container">
         <h2>Confirmación de Envío</h2>
         <p>El trámite ha sido enviado correctamente con los siguientes detalles:</p>

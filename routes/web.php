@@ -10,7 +10,7 @@ use App\Http\Controllers\trabajadoreController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\logoutController;
-
+use App\Http\Controllers\roleController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,23 +31,32 @@ Route::get('/logout',[logoutController::class,'logout'])->name('logout');
 });*/
 
 //controladores
-// En tu archivo de rutas
+// tramites
 Route::get('tramites/{id}/confirmacion', [tramiteController::class, 'confirmacion'])->name('tramites.confirmacion');
 Route::get('tramites/buscar', [tramiteController::class, 'buscar'])->name('tramites.buscar');
+Route::get('/seguimiento', [tramiteController::class, 'seguimiento'])->name('tramites.seguimiento');
 Route::resource('tramites', tramiteController::class);
+//personas
 Route::resource('personas', personaController::class);
+//derivaciones
 Route::get('derivaciones/create/{tramite}', [derivacioneController::class, 'create'])->name('derivaciones.create');
 Route::get('/derivaciones/{id}', [derivacioneController::class, 'show'])->name('derivaciones.show');
-
 Route::resource('derivaciones', derivacioneController::class)->except(['create','show']);
+//revisiones
 Route::get('revisiones/create/{tramite}', [revisioneController::class, 'create'])->name('revisiones.create');
 Route::get('/revisiones/{id}', [revisioneController::class, 'show'])->name('revisiones.show');
 Route::resource('revisiones',revisioneController::class)->except(['create','show']);;
+//areas
 Route::get('areas/{area_id}/trabajadores', [derivacioneController::class, 'getTrabajadoresByArea']);
 Route::resource('areas', areaController::class);
+//trabajadores-usuarios
 //Route::resource('users', userController::class);
 Route::resource('trabajadores', trabajadoreController::class);
-//tramites pdf
+//roles
+Route::resource('roles',roleController::class);
+
+
+//ver documentos pdf
 Route::get('tramites/{id}/ver-pdf', [tramiteController::class, 'verPdf'])->name('tramites.ver-pdf');
 Route::get('derivaciones/{id}/ver-pdf', [derivacioneController::class, 'verPdf'])->name('derivaciones.ver-pdf');
 Route::get('revisiones/{id}/ver-pdf', [revisioneController::class, 'verPdf'])->name('revisiones.ver-pdf');
@@ -58,8 +67,8 @@ Route::get('revisiones/{id}/ver-pdf', [revisioneController::class, 'verPdf'])->n
 
 
 
-Route::view('/detalle','tramite.detalle')->name('detalle');
-Route::view('/seguimiento','tramite.show')->name('seguimiento');
+//Route::view('/detalle','tramite.detalle')->name('detalle');
+//Route::view('/seguimiento','tramite.show')->name('seguimiento');
 
 //errores
 Route::get('/401', function () {

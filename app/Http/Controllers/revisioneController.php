@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Exception;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreTramiteRequest;
 use App\Http\Requests\StoreRevisioneRequest;

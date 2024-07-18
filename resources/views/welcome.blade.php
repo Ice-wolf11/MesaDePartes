@@ -36,7 +36,7 @@
                         </div>
                     </a>
 
-                    <a href="{{route("seguimiento")}}" class="card border-success mb-3" style="width: 18rem;">
+                    <a href="{{route("tramites.seguimiento")}}" class="card border-success mb-3" style="width: 18rem;">
                         <img src="{{asset('assets/img/oversight-bro (1).svg')}}" class="card-img-top" alt="">
                         <div class="card-body">
                         <h3 class="text-success">Ver mi Documento</h3>

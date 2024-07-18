@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Exception;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreTramiteRequest;
 use Illuminate\Support\Facades\DB;
@@ -40,6 +40,10 @@ class tramiteController extends Controller
         $tramite->load('persona', 'estado');
 
         return view('tramite.confirmacion', compact('tramite'));
+    }
+
+    public function seguimiento(){
+        return view('tramite.show');
     }
 
     public function buscar(Request $request)
@@ -102,8 +106,6 @@ class tramiteController extends Controller
      */
     public function store(StoreTramiteRequest $request)
     {
-        //dd($request);
-        //$estado = Estado::find(1);
 
         //generar codigo aleatorio
         $codigoSeguridad = str_pad(mt_rand(0, 9999), 4, '0', STR_PAD_LEFT);
@@ -150,8 +152,9 @@ class tramiteController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
     }
+
 
     /**
      * Show the form for editing the specified resource.
