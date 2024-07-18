@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Trabajadore;
 use App\Models\User;
 use App\Models\Area;
+use Spatie\Permission\Models\Role;
 
 class trabajadoreController extends Controller
 {
@@ -18,6 +19,7 @@ class trabajadoreController extends Controller
      */
     public function index()
     {
+
         $trabajador = Trabajadore::with('user','area')->latest()->get();
         //dd($area);
         return view('trabajador.index',['trabajadores' => $trabajador]);
@@ -31,9 +33,10 @@ class trabajadoreController extends Controller
         /*$trabajador = Trabajadore::with('user','area')->latest()->get();
         //dd($area);
         return view('trabajador.create',['trabajadores' => $trabajador]);*/
+        $roles = Role::all();
         $areas = Area::all(); // Obtener todas las áreas
         //$roles = Role::all(); // Obtener todos los roles
-        return view('trabajador.create', ['areas' => $areas, /*'roles' => $roles*/]);
+        return view('trabajador.create', compact('areas','roles'));
     }
 
     /**
@@ -60,7 +63,10 @@ class trabajadoreController extends Controller
                 'password' => $request->validated()['password'],
 
             ]);
-            $trabajador= Trabajadore::create([
+
+            $user->assignRole($request->role);
+
+            $trabajador = Trabajadore::create([
                 'nombre' => $request->validated()['nombre'],
                 'apellido' => $request->validated()['apellido'],
                 'area_id' => $request->validated()['area'],
@@ -91,11 +97,12 @@ class trabajadoreController extends Controller
         return view('trabajador.edit', ['trabajadore' => $trabajador, 'areas' => $areas]);
     }*/
     public function edit(Trabajadore $trabajadore)
-{
-    $areas = Area::all(); // Obtener todas las áreas
-    //dd($trabajadore);
-    return view('trabajador.edit', ['trabajador' => $trabajadore, 'areas' => $areas]);
-}
+    {
+        $roles = Role::all();
+        $areas = Area::all(); // Obtener todas las áreas
+        //dd($trabajadore);
+        return view('trabajador.edit', ['trabajador' => $trabajadore, 'areas' => $areas, 'roles' => $roles]);
+    }
 
 
     /**
@@ -114,6 +121,7 @@ class trabajadoreController extends Controller
             $user->password = Hash::make($request->validated()['password']);
         }
         $user->save();
+        $user->syncRoles([$request->role]);
 
         $trabajadore->nombre = $request->validated()['nombre'];
         $trabajadore->apellido = $request->validated()['apellido'];
@@ -129,9 +137,14 @@ class trabajadoreController extends Controller
     public function destroy(string $id)
     {
         //$area = Area::find($id);
+        $user = User::find($id);
         $trabajador = Trabajadore::find($id);
         $trabajador->user()->delete(); // Eliminar el usuario asociado
         $trabajador->delete(); // Eliminar el trabajador
+
+        //Eliminar rol
+        $rolUser = $user->getRoleNames()->first();
+        $user->removeRole($rolUser);
 
         return redirect()->route('trabajadores.index')->with('success', 'Usuario eliminado correctamente');
     }

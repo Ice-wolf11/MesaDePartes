@@ -70,8 +70,15 @@
                     </div>
                     <div class="col-md-6">
                         <label for="rol" class="form-label">Rol:</label>
-                        <select id="rol" name="rol" class="form-select" aria-label="Default select example">
+                        <select id="role" name="role" class="form-select" aria-label="Default select example">
                             <option selected>Seleccione...</option>
+                            @foreach ($roles as $item)
+                                @if ( in_array($item->name,$trabajador->user->roles->pluck('name')->toArray()) )
+                                    <option selected value="{{$item->name}}" @selected(old('role')==$item->name)>{{$item->name}}</option>
+                                @else
+                                    <option value="{{$item->name}}" @selected(old('role')==$item->name)>{{$item->name}}</option>
+                                @endif
+                            @endforeach
                         </select>
                         @error('rol')
                             <small class="text-danger">{{$message}}</small>

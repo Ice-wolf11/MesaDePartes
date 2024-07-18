@@ -40,7 +40,7 @@
                             
                             <td>{{$trabajador->user->name}}</td>
                             <td>{{$trabajador->area->nombre}}</td>
-                            <td></td>
+                            <td>{{$trabajador->user->getRoleNames()->first()}}</td>
                             <td><div class="d-grid gap-2 d-md-block">
                                 <form action="{{route('trabajadores.edit',['trabajadore' => $trabajador])}}" class="d-inline" method="GET">
                                 @csrf

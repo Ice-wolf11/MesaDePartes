@@ -28,7 +28,7 @@ class UpdateTrabajadoreRequest extends FormRequest
             'email' => 'required|email|max:255|unique:users,email,' . $this->route('trabajadore')->user_id,
             'password' => 'nullable|string|min:8|confirmed',
             'area' => 'required|exists:areas,id',
-            'rol' =>'required',
+            'role' => 'required|exists:roles,name'
         ];
     }
 }

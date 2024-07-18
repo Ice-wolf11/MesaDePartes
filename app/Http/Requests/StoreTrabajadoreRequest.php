@@ -27,6 +27,7 @@ class StoreTrabajadoreRequest extends FormRequest
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
             'area' => 'required|exists:areas,id',
+            'role' => 'required|exists:roles,name'
         ];
     }
 }
