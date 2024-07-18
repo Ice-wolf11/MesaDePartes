@@ -17,6 +17,37 @@ use App\Models\Area;
 class derivacioneController extends Controller
 {
 
+    
+    public static function middleware(): array
+    {
+        return [
+            'permission:ver-todas-las-derivaciones|ver-mis-derivaciones|eliminar-derivacion' => ['only' => ['index']],
+            'permission:ver-mis-derivaciones' => ['only' => ['show']],
+            'permission:eliminar-derivacion' => ['only' => ['delete']],
+        ];
+    }
+    
+    
+    
+    
+    /*public static function middleware(): array
+    {
+        return [
+            new Middleware('ver-roles|crear-roles|editar-roles|eliminar-roles', ['only' => ['index']]),
+            new Middleware('crear-roles', ['only' => ['create', 'store']]),
+            new Middleware('editar-roles', ['only' => ['edit', 'update']]),
+            new Middleware('eliminar-roles', ['only' => ['destroy']]),
+        ];
+    }
+
+    /*function __construct()
+    {
+        $this->middleware('permission:ver-todas-las-derivaciones|ver-mis-derivaciones|eliminar-derivacion',['only'=>['index']]);
+        $this->middleware('permission:ver-mis-derivaciones',['only'=>['show']]);
+        $this->middleware('permission:eliminar-derivacion',['only'=>['delete']]);
+        
+    }*/
+
     public function verPdf($id)
     {
         $derivacion = Derivacione::findOrFail($id);

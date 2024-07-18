@@ -13,11 +13,30 @@ use App\Models\User;
 use App\Models\Derivacione;
 use App\Models\Revisione;
 use App\Models\Area;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
 
 class tramiteController extends Controller
 {
-   
+
+    public static function middleware(): array
+    {
+        return [
+            'permission:ver-tramites|eliminar-tramites' => ['only' => ['index']],
+            'permission:eliminar-tramites' => ['only' => ['destroy']],
+        ];
+    }
+    
+    /*public static function middleware(): array
+    {
+        return [
+            new Middleware('ver-tramites|eliminar-tramites',['only'=>['index']]),
+            new Middleware('eliminar-tramites',['only'=>['destroy']]),
+            
+        ];
+    }*/
+
     public function verPdf($id)
     {
         $tramite = Tramite::findOrFail($id);

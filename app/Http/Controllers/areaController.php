@@ -8,12 +8,56 @@ use App\Http\Requests\StoreAreaRequest;
 use App\Http\Requests\UpdateAreaRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\Area;
+use App\Http\Controllers\trabajadoreController;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
 class areaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+    //para que los permisos funcionen
+    public static function middleware(): array
+    {
+        return [
+            'permission:ver-areas|crear-areas|editar-areas|eliminar-areas' => ['only' => ['index']],
+            'permission:crear-areas' => ['only' => ['create', 'store']],
+            'permission:editar-areas' => ['only' => ['edit', 'update']],
+            'permission:eliminar-areas' => ['only' => ['destroy']],
+        ];
+    }
+
+
+
+    /*
+    public static function middleware(): array
+    {
+        return [
+            // examples with aliases, pipe-separated names, guards, etc:
+            //'role_or_permission:manager|edit articles',
+            
+            //opcion1
+
+
+            //opcion 2
+            new Middleware('permission:ver-areas|crear-areas|editar-areas|eliminar-areas', only: ['index']),
+            new Middleware('permission:crear-areas', only: ['create','store']),
+            new Middleware('permission:editar-areas', only: ['edit','update']),
+            new Middleware('permission:eliminar-areas', only: ['destroy']),
+        ];
+    }
+        
+    /*function __construct()
+    {
+        $this->middleware('permission:ver-areas|crear-areas|editar-areas|eliminar-areas',['only'=>['index']]);
+        $this->middleware('permission:crear-areas',['only'=>['create','store']]);
+        $this->middleware('permission:editar-areas',['only'=>['edit','update']]);
+        $this->middleware('permission:eliminar-areas',['only'=>['destroy']]);
+    }*/
+
+
     public function index()
     {
         $area = Area::all();

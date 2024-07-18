@@ -11,9 +11,33 @@ use App\Models\Trabajadore;
 use App\Models\User;
 use App\Models\Area;
 use Spatie\Permission\Models\Role;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
 class trabajadoreController extends Controller
 {
+    
+    public static function middleware(): array
+    {
+        return [
+            'permission:ver-trabajadores|crear-trabajadores|editar-trabajadores|eliminar-trabajadores' => ['only' => ['index']],
+            'permission:crear-trabajadores' => ['only' => ['create', 'store']],
+            'permission:editar-trabajadores' => ['only' => ['edit', 'update']],
+            'permission:eliminar-trabajadores' => ['only' => ['destroy']],
+        ];
+    }
+    
+    /*
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('ver-trabajadores|crear-trabajadores|editar-trabajadores|eliminar-trabajadores',['only'=>['index']]),
+            new Middleware('crear-trabajadores',['only'=>['create','store']]),
+            new Middleware('editar-trabajadores',['only'=>['edit','update']]),
+            new Middleware('eliminar-trabajadores',['only'=>['destroy']]),
+        ];
+    }*/
+
     /**
      * Display a listing of the resource.
      */

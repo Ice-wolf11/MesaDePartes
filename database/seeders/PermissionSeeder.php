@@ -21,7 +21,7 @@ class PermissionSeeder extends Seeder
             'editar-areas',
             'eliminar-areas',
             
-            //tramites
+            //derivaciones
             'ver-todas-las-derivaciones',
             'ver-mis-derivaciones',
             //'crear-derivacion',//tal vez se elimine
@@ -42,6 +42,12 @@ class PermissionSeeder extends Seeder
             //tramites
             'ver-tramites',
             'eliminar-tramites',
+
+            //roles
+            'ver-roles',
+            'crear-roles',
+            'editar-roles',
+            'eliminar-roles',
             
         ];
 

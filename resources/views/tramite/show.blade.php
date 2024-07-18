@@ -239,7 +239,7 @@
                 <th>#</th>
                 <th>Fecha Hora</th>
                 <th>Descripción</th>
-                <th>Usuario</th>
+                <th>Encargado</th>
             </tr>
         </thead>
         <tbody id="tbody-seguimiento">

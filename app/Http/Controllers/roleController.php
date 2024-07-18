@@ -6,9 +6,32 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
 class roleController extends Controller
 {
+
+    public static function middleware(): array
+    {
+        return [
+            'permission:ver-roles|crear-roles|editar-roles|eliminar-roles' => ['only' => ['index']],
+            'permission:crear-roles' => ['only' => ['create', 'store']],
+            'permission:editar-roles' => ['only' => ['edit', 'update']],
+            'permission:eliminar-roles' => ['only' => ['destroy']],
+        ];
+    }
+    
+    
+    /*public static function middleware(): array
+    {
+        return [
+            new Middleware('ver-roles|crear-roles|editar-roles|eliminar-roles', ['only' => ['index']]),
+            new Middleware('crear-roles', ['only' => ['create', 'store']]),
+            new Middleware('editar-roles', ['only' => ['edit', 'update']]),
+            new Middleware('eliminar-roles', ['only' => ['destroy']]),
+        ];
+    }*/
     /**
      * Display a listing of the resource.
      */

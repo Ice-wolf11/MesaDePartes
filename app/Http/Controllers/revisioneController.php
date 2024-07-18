@@ -15,9 +15,31 @@ use App\Models\Derivacione;
 use App\Models\Trabajadore;
 use App\Models\Revisione;
 use App\Models\Area;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
 class revisioneController extends Controller
 {
+    
+    public static function middleware(): array
+    {
+        return [
+            'permission:ver-todas-las-revisiones|ver-mis-revisiones|crear-revision|eliminar-revision' => ['only' => ['index']],
+            'permission:ver-mis-revisiones' => ['only' => ['show']],
+            'permission:crear-revision' => ['only' => ['create', 'tore']],
+            'permission:eliminar-revision' => ['only' => ['destroy']],
+        ];
+    }
+    
+    /*public static function middleware(): array
+    {
+        return [
+            new Middleware('ver-todas-las-revisiones|ver-mis-revisiones|crear-revision|eliminar-revision',['only'=>['index']]),
+            new Middleware('ver-mis-revisiones',['only'=>['show']]),
+            new Middleware('crear-revision',['only'=>['create','store']]),
+            new Middleware('eliminar-revision',['only'=>['destroy']]),
+        ];
+    }*/
     public function verPdf($id)
     {
         $revision = Revisione::findOrFail($id);
