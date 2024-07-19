@@ -52,12 +52,16 @@
                             <td>
                                 <div class="d-grid gap-2 d-md-block">
                                     <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#verModal-{{$derivacion->id}}" >Ver</button> 
-                                    <form action="{{ route('revisiones.create', ['tramite' => $derivacion->tramite->id]) }}" method="GET" class="d-inline">@csrf<button class="btn btn-warning" type="submit">Revisar</button></form> 
+                                    @can('crear-revision')
+                                    <form action="{{ route('revisiones.create', ['tramite' => $derivacion->tramite->id]) }}" method="GET" class="d-inline">@csrf<button class="btn btn-warning" type="submit">Revisar</button></form>
+                                    @endcan 
+                                    @can('eliminar-derivacion')
                                     @if ($derivacion->tramite->estado->id == '2')
                                     <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal-{{$derivacion->id}}"  disabled>Eliminar</button>
                                     @else
                                     <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal-{{$derivacion->id}}"  >Eliminar</button>
                                     @endif
+                                    @endcan
                                     
                                 </div>
                             </td>

@@ -12,11 +12,13 @@
             <li class="breadcrumb-item"><a href="{{route('panel')}}">Inicio</a></li>
             <li class="breadcrumb-item" active>Areas</li>
         </ol>
+        @can('editar-areas')
         <div class="mb-4">
             <a href="{{route('areas.create')}}">
                 <button type="button" class="btn btn-primary">Añadir nuevo registro</button>
             </a>
         </div>
+        @endcan
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
@@ -37,8 +39,12 @@
                             <td>{{$area->id}}</td>
                             <td>{{$area->nombre}}</td>
                             <td><div class="d-grid gap-2 d-md-block">
+                                @can('editar-areas')
                                 <form action="{{route('areas.edit',['area'=>$area])}}" class="d-inline">@csrf<button class="btn btn-success" type="submit">Editar</button></form>
-                                <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal-{{$area->id}}">Eliminar</button>   
+                                @endcan
+                                @can('eliminar-areas')
+                                <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal-{{$area->id}}">Eliminar</button>
+                                @endcan   
                                 </div>
                             </td>
                            </tr>

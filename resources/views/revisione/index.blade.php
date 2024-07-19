@@ -52,7 +52,9 @@
                                 <td>
                                     <div class="d-grid gap-2 d-md-block">
                                         <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#verModal-{{ $revision->id }}">Ver</button>
+                                        @can('eliminar-revision')
                                         <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal-{{ $revision->id }}">Eliminar</button>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

@@ -15,13 +15,13 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
         $permisos = [
-            //areas
+            //areas => listo
             'ver-areas',
             'crear-areas',
             'editar-areas',
             'eliminar-areas',
             
-            //derivaciones
+            //derivaciones => listo
             'ver-todas-las-derivaciones',
             'ver-mis-derivaciones',
             //'crear-derivacion',//tal vez se elimine
@@ -30,20 +30,20 @@ class PermissionSeeder extends Seeder
             //revisiones
             'ver-todas-las-revisiones',
             'ver-mis-revisiones',
-            'crear-revision',
+            'crear-revision', //falta
             'eliminar-revision',
 
-            //trabajadores-usuarios
+            //trabajadores-usuarios =>listo
             'ver-trabajadores',
             'crear-trabajadores',
             'editar-trabajadores',
             'eliminar-trabajadores',
 
-            //tramites
+            //tramites =>listo
             'ver-tramites',
             'eliminar-tramites',
 
-            //roles
+            //roles =>listo
             'ver-roles',
             'crear-roles',
             'editar-roles',

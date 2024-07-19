@@ -13,9 +13,11 @@
             <li class="breadcrumb-item" active>Usuarios</li>
         </ol>
         <div class="mb-4">
+            @can('crear-trabajadores')
             <a href="{{route('trabajadores.create')}}">
                 <button type="button" class="btn btn-primary">Añadir nuevo registro</button>
             </a>
+            @endcan
         </div>
         <div class="card mb-4">
             <div class="card-header">
@@ -42,11 +44,15 @@
                             <td>{{$trabajador->area->nombre}}</td>
                             <td>{{$trabajador->user->getRoleNames()->first()}}</td>
                             <td><div class="d-grid gap-2 d-md-block">
+                                @can('editar-trabajadores')
                                 <form action="{{route('trabajadores.edit',['trabajadore' => $trabajador])}}" class="d-inline" method="GET">
-                                @csrf
-                                    <button class="btn btn-success" type="submit">Editar</button>
-                                </form>
+                                    @csrf
+                                        <button class="btn btn-success" type="submit">Editar</button>
+                                    </form>
+                                @endcan
+                                @can('eliminar-trabajadores')
                                 <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal-{{$trabajador->id}}">Eliminar</button>   
+                                @endcan
                                 </div>
                             </td>
                         </tr>
