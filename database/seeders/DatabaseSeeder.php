@@ -22,9 +22,9 @@ class DatabaseSeeder extends Seeder
 
 
         $this->call(AreaSeeder::class);
-        $this->call(TrabajadoreSeeder::class);
         $this->call(EstadoSeeder::class);
         $this->call(PermissionSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(TrabajadoreSeeder::class);
     }
 }
