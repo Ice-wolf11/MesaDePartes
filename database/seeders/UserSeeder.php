@@ -14,19 +14,29 @@ class UserSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+   public function run(): void
     {
+        // Crear usuario administrador fijo
         $user = User::create([
-                'name'   => 'Administrador',   
-                'email'    => 'admin@gmail.com',
-                'password' => bcrypt('password') 
+            'name' => 'Administrador',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('password'),
         ]);
 
-        //usuario administrador
-        $rol = Role::create(['name'=>'Administrador']);
+        // Roles y permisos
+        $rolAdmin = Role::create(['name' => 'Administrador']);
         $permisos = Permission::pluck('id','id')->all();
-        $rol->syncPermissions($permisos);
-        //$user = User::find(1);
+        $rolAdmin->syncPermissions($permisos);
         $user->assignRole('Administrador');
+
+        // Otros 5 roles con mismos permisos
+        $rolesExtras = ['Director','Jefe de Área','Secretario','Profesor','Trabajador'];
+        foreach ($rolesExtras as $rolNombre) {
+            $rol = Role::create(['name'=>$rolNombre]);
+            $rol->syncPermissions($permisos);
+        }
+
+        // Generar 1000 usuarios aleatorios
+        User::factory()->count(50)->create();
     }
 }

@@ -23,5 +23,7 @@ class TrabajadoreSeeder extends Seeder
             ],
             
         ]);
+
+        Trabajadore::factory()->count(50)->create();
     }
 }

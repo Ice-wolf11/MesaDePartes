@@ -14,10 +14,15 @@ class AreaSeeder extends Seeder
      */
     public function run(): void
     {
-        Area::Insert([
-            [
-                'nombre' => 'Soporte Tecnico'
-            ]
+        // Datos fijos
+        Area::insert([
+            ['nombre' => 'Soporte Tecnico'],
         ]);
+
+        $areas = ['Contabilidad','Recursos Humanos','Sistemas','Marketing','Ventas','Compras','Logística','Finanzas','Legal','Atención al Cliente'];
+
+        foreach ($areas as $nombre) {
+            Area::create(['nombre' => $nombre]);
+        }
     }
 }
